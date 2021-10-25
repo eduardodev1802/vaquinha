@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="login-page">
+    <div class="login-page__left">
+      <h1>Logo</h1>
+    </div>
+
+    <div class="login-page__right">
+      <h2>Entre e ajude pessoas a terem uma vida mais digna. Promova Amor.</h2>
+
+      <div class="login-page__right--socialMedia">
+        <div class="item">
+          <img src="/assets/img/icon/facebook.svg" alt="" srcset="">
+          <p>Facebook</p>
+        </div>
+        <div class="item">
+          <img src="/assets/img/icon/google.svg" alt="" srcset="">
+          <p>Google</p>
+        </div>
+      </div>
+
+      <div class="login-page__right--groupLogin">
+        <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Entre Agora">
+
+            <form [formGroup]="formLogin">
+
+              <div class="form-group">
+                <mat-icon matPrefix>email</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="Email" formControlName="email">
+                  <mat-error *ngIf="checkError('email', 'required')">E-mail* é obrigatório</mat-error>
+                  <mat-error *ngIf="checkError('email', 'email')">Digite um e-mail válido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-icon matPrefix>lock</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="Senha" type="password" formControlName="password">
+                  <mat-error *ngIf="checkError('password', 'required')">Senha é obrigatória</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="forget-password">
+                <a href="#">Esqueceu sua senha ?</a>
+              </div>
+
+              <button mat-raised-button color="primary" [disabled]="!formLogin.valid">
+                Avançar
+                <mat-icon matPrefix>arrow_forward</mat-icon>
+              </button>
+            </form>
+
+          </mat-tab>
+          <mat-tab label="Crie uma conta">
+            <div class="tabs">
+              <div class="tab">
+                <img src="/assets/img/icon/checked-group.svg" alt="" srcset="">
+                <p>Pessoa Física</p>
+              </div>
+              <div class="tab disabled">
+                <p>Pessoa Jurídica</p>
+              </div>
+            </div>
+
+            <form [formGroup]="formCadastro">
+              <div class="form-group">
+                <mat-icon matPrefix>person</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="Nome" formControlName="nome">
+                  <mat-error *ngIf="checkErrorCadastro('nome', 'required')">Nome é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-icon matPrefix>email</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="E-mail" formControlName="email">
+                  <mat-error *ngIf="checkErrorCadastro('email', 'required')">E-mail* é obrigatório</mat-error>
+                  <mat-error *ngIf="checkErrorCadastro('email', 'email')">Digite um e-mail válido</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-icon matPrefix>date_range</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="Data de Nascimento" formControlName="data">
+                  <mat-error *ngIf="checkErrorCadastro('data', 'required')">Data de nascimento é obrigatória</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-icon matPrefix>recent_actors</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00">
+                  <mat-error *ngIf="checkErrorCadastro('cpf', 'required')">CPF é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-icon matPrefix>phone_iphone</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="Telefone" formControlName="telefone" mask="(00) 00000-0000">
+                  <mat-error *ngIf="checkErrorCadastro('cpf', 'required')">Telefone é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-icon matPrefix>lock</mat-icon>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                  <input matInput placeholder="Senha" formControlName="senha">
+                  <mat-error *ngIf="checkErrorCadastro('senha', 'required')">Senha é obrigatória</mat-error>
+                </mat-form-field>
+              </div>
+
+              <button mat-raised-button color="primary" [disabled]="!formCadastro.valid">
+                Avançar
+                <mat-icon matPrefix>arrow_forward</mat-icon>
+              </button>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>

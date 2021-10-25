@@ -1,0 +1,18 @@
+/* TABS */
+.mat-tab-label-content {
+    font-family: "Poppins", sans-serif !important;
+    font-size: 16px;
+    justify-content: start;
+
+    @media (max-width: 992px) {
+        font-size: 14px;
+    }
+}
+
+.mat-tab-label-active {
+    .mat-tab-label-content {
+        color: #342ead;
+        font-weight: 500;
+        opacity: 1;
+    }
+}

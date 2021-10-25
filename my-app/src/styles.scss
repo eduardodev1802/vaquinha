@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F4F6FC;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+
+// Plus imports for other components in your app.
+@import './custom-component-themes.scss';
+@import './theme.scss';
+@import './assets/theme/containers.scss';
+@import './assets/theme/customize-components.scss';
