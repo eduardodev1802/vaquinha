@@ -9,6 +9,7 @@ import { NgxWizSSOModule } from '@wizsolucoes/ngx-wiz-sso';
 import { environment } from 'src/environments/environment';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [MainLayoutComponent, NavComponent],
@@ -17,8 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
-    NgxWizSSOModule.forRoot(environment.ssoConfig),
     MatToolbarModule,
+    MatIconModule,
     MatButtonModule,
   ],
   exports: [MainLayoutComponent, NgxWizSSOModule],

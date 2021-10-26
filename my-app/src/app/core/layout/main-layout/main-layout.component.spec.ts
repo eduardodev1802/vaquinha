@@ -17,7 +17,6 @@ describe('MainLayoutComponent', () => {
         imports: [
           RouterTestingModule,
           HttpClientTestingModule,
-          NgxWizSSOModule.forRoot(environment.ssoConfig),
           MatToolbarModule,
         ],
         declarations: [MainLayoutComponent, NavComponent],

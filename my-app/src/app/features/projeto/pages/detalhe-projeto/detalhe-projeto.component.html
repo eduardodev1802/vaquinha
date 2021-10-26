@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="detalhe">
+        <div class="detalhe__left">
+            <img src="http://www.agenciabrasilia.df.gov.br/wp-conteudo/uploads/2019/09/20.9.-Sa%C3%BAde.-FOTO-BRENO-ESAKI-SA%C3%9ADE-DF-3-1.jpg"
+                alt="" srcset="">
+        </div>
+
+        <div class="detalhe__right">
+            <div class="detalhe__right--arrecadacao">
+                <div class="left">
+                    <label>Arrecadado</label>
+                    <p>R$ 20.985,70</p>
+                </div>
+
+                <div class="right">
+                    <div class="progress">
+                        <span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
+                        <div class="overlay"></div>
+                        <div class="left"></div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detalhe__right--metas">
+                <div>
+                    <label>Meta</label>
+                    <p>R$36.000</p>
+                </div>
+
+                <div>
+                    <label>Ajudas</label>
+                    <p>265</p>
+                </div>
+
+                <div>
+                    <label>Comentários</label>
+                    <p>134</p>
+                </div>
+            </div>
+
+            <div class="detalhe__right--contribuir">
+                <button mat-raised-button color="primary">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up_alt</mat-icon>
+                    Quero ajudar uma vida
+                </button>
+            </div>
+
+            <div class="detalhe__right--autor">
+                <div class="avatar">
+                    <img src="/assets/img/avatar-mock.svg" alt="" srcset="">
+                    <h3>Márcia Leónidas</h3>
+                </div>
+
+                <a href="#">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">public</mat-icon>
+                    ver projetos
+                </a>
+            </div>
+
+            <div class="detalhe__right--socialMedia">
+                <h3>Compartilhe com seus amigos</h3>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/img/icon/facebook-shared.svg" alt="" srcset="">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <img src="/assets/img/icon/twiiter-shared.svg" alt="" srcset="">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <img src="/assets/img/icon/email-shared.svg" alt="" srcset="">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <img src="/assets/img/icon/messager-shared.svg" alt="" srcset="">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <img src="/assets/img/icon/whats-shared.svg" alt="" srcset="">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <img src="/assets/img/icon/instagram-shared.svg" alt="" srcset="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="titulo">
+        <h2>Ajude a casa da família Silva</h2>
+    </div>
+
+    <div class="content">
+        <div class="tabs">
+            <div class="tab" (click)="escolherTabDetalhe(1)" [ngClass]="{active: tabDetalhe === 1}">Descrição</div>
+            <div class="tab" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Prestação de contas (03)</div>
+            <div class="tab" (click)="escolherTabDetalhe(3)" [ngClass]="{active: tabDetalhe === 3}">Contribuições</div>
+            <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico (10)</div>
+            <div class="tab" (click)="escolherTabDetalhe(5)" [ngClass]="{active: tabDetalhe === 5}">Comentários</div>
+        </div>
+
+        <div class="conteudo">
+            <app-descricao *ngIf="tabDetalhe === 1"></app-descricao>
+            <app-prestacao-contas *ngIf="tabDetalhe === 2"></app-prestacao-contas>
+            <app-contribuicoes *ngIf="tabDetalhe === 3"></app-contribuicoes>
+            <app-historico *ngIf="tabDetalhe === 4"></app-historico>
+            <app-comentarios *ngIf="tabDetalhe === 5"></app-comentarios>
+        </div>
+    </div>
+</div>

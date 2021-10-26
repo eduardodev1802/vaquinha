@@ -1,12 +1,33 @@
-.navbar-spacer {
-  flex: 1 1 auto;
-}
+mat-toolbar {
+  background-color: #342EAD;
+  justify-content: space-between;
+  margin-bottom: 40px;
 
-.navbar-brand {
-  margin-right: 20px;
+  .left {
+    h1 {
+      color: #fff;
+      font-size: 26px;
+      text-transform: uppercase;
+    }
+  }
 
-  .navbar-item {
+  .right {
     display: flex;
-    align-items: center;
+
+    .download-app {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        color: #fff;
+        margin-right: 15px;
+      }
+
+      p {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
   }
 }
