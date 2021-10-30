@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProjetoRoutingModule } from './projeto-routing.module';
 import { DetalheProjetoComponent } from './pages/detalhe-projeto/detalhe-projeto.component';
 
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DescricaoComponent } from './components/descricao/descricao.component';
@@ -25,7 +26,8 @@ import { ComentariosComponent } from './components/comentarios/comentarios.compo
     CommonModule,
     ProjetoRoutingModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule
   ]
 })
 export class ProjetoModule { }

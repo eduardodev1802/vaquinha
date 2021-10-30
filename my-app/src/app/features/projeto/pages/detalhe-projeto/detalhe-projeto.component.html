@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="projetoData">
     <div class="detalhe">
         <div class="detalhe__left">
             <img src="http://www.agenciabrasilia.df.gov.br/wp-conteudo/uploads/2019/09/20.9.-Sa%C3%BAde.-FOTO-BRENO-ESAKI-SA%C3%9ADE-DF-3-1.jpg"
@@ -25,12 +25,12 @@
             <div class="detalhe__right--metas">
                 <div>
                     <label>Meta</label>
-                    <p>R$36.000</p>
+                    <p>{{ projetoData.result[0].goal | currency:'BRL' }}</p>
                 </div>
 
                 <div>
                     <label>Ajudas</label>
-                    <p>265</p>
+                    <p>{{ listaContribuicao.length }}</p>
                 </div>
 
                 <div>
@@ -102,7 +102,7 @@
     </div>
 
     <div class="titulo">
-        <h2>Ajude a casa da família Silva</h2>
+        <h2>{{ projetoData.result[0].title }}</h2>
     </div>
 
     <div class="content">
@@ -115,11 +115,11 @@
         </div>
 
         <div class="conteudo">
-            <app-descricao *ngIf="tabDetalhe === 1"></app-descricao>
+            <app-descricao *ngIf="tabDetalhe === 1" [descricao]="projetoData.result[0].description"></app-descricao>
             <app-prestacao-contas *ngIf="tabDetalhe === 2"></app-prestacao-contas>
-            <app-contribuicoes *ngIf="tabDetalhe === 3"></app-contribuicoes>
+            <app-contribuicoes *ngIf="tabDetalhe === 3" [contribuicoes]="listaContribuicao"></app-contribuicoes>
             <app-historico *ngIf="tabDetalhe === 4"></app-historico>
-            <app-comentarios *ngIf="tabDetalhe === 5"></app-comentarios>
+            <app-comentarios *ngIf="tabDetalhe === 5" [comentarios]="ListaComentarios"></app-comentarios>
         </div>
     </div>
 </div>

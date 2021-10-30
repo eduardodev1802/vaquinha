@@ -1,1 +1,52 @@
-<p>comentarios works!</p>
+<div class="comentarios-page" *ngIf="!loading">
+    <h3>Comentários</h3>
+
+    <div class="comentarios-page__list">
+
+        <div class="comentarios-page__list--card" *ngFor="let item of comentarios">
+            <div class="header">
+                <div class="left">
+                    <div class="avatar"></div>
+                    <div class="info">
+                        <h4>{{ item.user.nome }}</h4>
+                        <p>{{ item.comment.comment }}</p>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <div class="like">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up_off_alt</mat-icon>
+                        <p>{{ item.likes.length }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="body" *ngIf="item.respostas.length > 0">
+
+                <div class="card" *ngFor="let resposta of item.respostas">
+
+
+                    <div class="header">
+                        <div class="left">
+                            <div class="avatar"></div>
+                            <div class="info">
+                                <h4>{{ resposta.user.nome }}</h4>
+                                <p>{{ resposta.comment.comment }}</p>
+                            </div>
+                        </div>
+
+                        <div class="right">
+                            <div class="like">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up_off_alt
+                                </mat-icon>
+                                <p>{{ resposta.likes.length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

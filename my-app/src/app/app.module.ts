@@ -33,7 +33,6 @@ registerLocaleData(localePt, 'pt-BR');
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },
-    { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
     { provide: ErrorHandler, useClass: NgApplicationInsightsErrorHandler },
   ],
   bootstrap: [AppComponent],
