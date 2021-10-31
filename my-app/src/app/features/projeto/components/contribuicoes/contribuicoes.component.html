@@ -1,1 +1,27 @@
-<p>contribuicoes works!</p>
+<div class="contribuicoes-page">
+    <h3>Prestações de conta</h3>
+
+    <div class="contribuicoes-page__list" *ngIf="contribuicoes.length">
+        <div class="contribuicoes-page__list--card" *ngFor="let item of contribuicoes">
+            <div class="header">
+                <div class="left">
+                    <div class="avatar"></div>
+                    <div class="info">
+                        <h4 *ngIf="item.anonymous">Anônimo</h4>
+                        <p>{{ item.createDate }}</p>
+                    </div>
+                </div>
+
+                <div class="right">
+                    <div class="like">
+                        <p>{{ item.ammount | currency:'BRL'  }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="not-found" *ngIf="!contribuicoes.length">
+        <h3>Ainda não registradas nenhuma contribuição. Seja o Primeiro a ajudar :)</h3>
+    </div>
+</div>

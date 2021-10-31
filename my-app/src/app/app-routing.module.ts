@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'projeto/detalhe/15',
+    redirectTo: '',
   },
   {
     path: 'home',
@@ -18,7 +18,8 @@ const routes: Routes = [
   {
     path: 'projeto',
     loadChildren: () =>
-      import('./features/projeto/projeto.module').then((m) => m.ProjetoModule)
+      import('./features/projeto/projeto.module').then((m) => m.ProjetoModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
@@ -35,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

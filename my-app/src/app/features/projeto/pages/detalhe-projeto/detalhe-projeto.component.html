@@ -9,16 +9,15 @@
             <div class="detalhe__right--arrecadacao">
                 <div class="left">
                     <label>Arrecadado</label>
-                    <p>R$ 20.985,70</p>
+                    <p *ngIf="arrecadado">{{ arrecadado | currency:'BRL' }}</p>
+                    <p *ngIf="!arrecadado">R$ 0</p>
                 </div>
 
                 <div class="right">
-                    <div class="progress">
-                        <span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
-                        <div class="overlay"></div>
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </div>
+                    <circle-progress [percent]="porcentagem" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+                        [outerStrokeColor]="'#FFBD00'" [innerStrokeColor]="'#EEEEFF'" [animation]="true"
+                        [animationDuration]="300">
+                    </circle-progress>
                 </div>
             </div>
 
@@ -35,7 +34,7 @@
 
                 <div>
                     <label>Comentários</label>
-                    <p>134</p>
+                    <p>{{ ListaComentarios.length }}</p>
                 </div>
             </div>
 
@@ -108,9 +107,10 @@
     <div class="content">
         <div class="tabs">
             <div class="tab" (click)="escolherTabDetalhe(1)" [ngClass]="{active: tabDetalhe === 1}">Descrição</div>
-            <div class="tab" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Prestação de contas (03)</div>
+            <div class="tab" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Prestação de contas
+            </div>
             <div class="tab" (click)="escolherTabDetalhe(3)" [ngClass]="{active: tabDetalhe === 3}">Contribuições</div>
-            <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico (10)</div>
+            <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico</div>
             <div class="tab" (click)="escolherTabDetalhe(5)" [ngClass]="{active: tabDetalhe === 5}">Comentários</div>
         </div>
 
@@ -118,7 +118,7 @@
             <app-descricao *ngIf="tabDetalhe === 1" [descricao]="projetoData.result[0].description"></app-descricao>
             <app-prestacao-contas *ngIf="tabDetalhe === 2"></app-prestacao-contas>
             <app-contribuicoes *ngIf="tabDetalhe === 3" [contribuicoes]="listaContribuicao"></app-contribuicoes>
-            <app-historico *ngIf="tabDetalhe === 4"></app-historico>
+            <app-historico *ngIf="tabDetalhe === 4" [historico]="timelineData"></app-historico>
             <app-comentarios *ngIf="tabDetalhe === 5" [comentarios]="ListaComentarios"></app-comentarios>
         </div>
     </div>

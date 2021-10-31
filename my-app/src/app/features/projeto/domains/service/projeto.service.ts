@@ -13,7 +13,7 @@ export class ProjetoService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       'Authorization': 'my-auth-token'
     })
   };
@@ -64,4 +64,15 @@ export class ProjetoService {
       }));
   }
 
+  getTimeLine(id: any) {
+    return this.http.get<any>(`${environment.apiUrl}project/from-user/${id}?from=0&pageSize=10&lat=-15.83&lon=-47.86`, {
+      headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
 }
+
+

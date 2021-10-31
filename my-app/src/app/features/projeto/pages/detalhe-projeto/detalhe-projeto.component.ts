@@ -13,6 +13,9 @@ export class DetalheProjetoComponent implements OnInit {
   tabDetalhe = 1;
   ListaComentarios: any;
   listaContribuicao: any;
+  timelineData: any;
+  arrecadado: any;
+  porcentagem: any;
 
   constructor(private projetoService: ProjetoService, private route: ActivatedRoute) { }
 
@@ -29,6 +32,7 @@ export class DetalheProjetoComponent implements OnInit {
 
       this.getComentarios(this.idProjeto);
       this.getContribuicoes(this.idProjeto)
+      this.getTimeline(this.projetoData);
     })
   }
 
@@ -45,6 +49,34 @@ export class DetalheProjetoComponent implements OnInit {
   getContribuicoes(id: any) {
     this.projetoService.getContribuicoes(id).subscribe((resp) => {
       this.listaContribuicao = resp;
+
+      this.arrecadado = this.somarContribuicoes(this.listaContribuicao);
+      this.porcentagem = this.calcularRegraDeTres(this.arrecadado, this.projetoData.result[0].goal);
+    })
+  }
+
+  somarContribuicoes(data: any) {
+    let soma = 0;
+
+    data.forEach((element: any) => {
+      soma += element.ammount;
+    });
+
+    return soma;
+  }
+
+  calcularRegraDeTres(valor: number, total: number) {
+
+    let porcentagem = (valor * 100) / total;
+
+    let resultado = parseInt(porcentagem.toFixed(3));
+
+    return resultado
+  }
+
+  getTimeline(data: any) {
+    this.projetoService.getTimeLine(data.result[0].owner).subscribe((resp) => {
+      this.timelineData = resp;
     })
   }
 }
