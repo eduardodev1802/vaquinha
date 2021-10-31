@@ -1,4 +1,61 @@
-<p data-test="my-paragraph">
-  Acesse o módulo de <strong>Vendas</strong> pelo menu superior para fazer seu
-  cálculo.
-</p>
+<div class="container">
+  <div class="home-page">
+    <div class="home-page__filters">
+      <div class="home-page__filters--left">
+        <h2>
+          <span class="material-icons">
+            public
+          </span>
+          Explore Nossos Projetos Ativos
+        </h2>
+      </div>
+
+
+      <div class="home-page__filters--right">
+        <div class="search">
+          <span class="material-icons">
+            search
+          </span>
+          <input type="text" placeholder="Pesquise por Estado ou Cidade">
+        </div>
+
+        <div class="tune">
+          <span class="material-icons">
+            tune
+          </span>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="home-page__listProjet">
+      <div class="home-page__listProjet--results">
+        <div class="left">
+          <h3>Resultados retornados (200)</h3>
+        </div>
+        <div class="right">
+          <ul>
+            <li [ngClass]="{active: item.id === filtroCategoria}" *ngFor="let item of listCategoriasFiltro"
+              (click)="escolherFiltroCategoria(item.id)">{{ item.nome }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="home-page__listProjet--listCard">
+        <div *ngFor="let item of projetos" class="content-card">
+          <app-card></app-card>
+        </div>
+      </div>
+
+      <div class="home-page__listProjet--moreRegisters">
+        <button mat-raised-button color="primary">
+          <span class="material-icons">
+            restart_alt
+          </span>
+          Mostrar mais projeto</button>
+      </div>
+    </div>
+  </div>
+</div>

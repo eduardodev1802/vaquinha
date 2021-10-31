@@ -13,13 +13,12 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./features/home/home.module').then((m) => m.HomeModule),
-    canActivate: [AuthGuard],
   },
   {
     path: 'projeto',
     loadChildren: () =>
       import('./features/projeto/projeto.module').then((m) => m.ProjetoModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'login',

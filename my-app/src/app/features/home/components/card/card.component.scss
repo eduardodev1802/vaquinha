@@ -1,0 +1,174 @@
+.card {
+  
+
+    &__header {
+        max-height: 154px;
+        position: relative;
+
+        &--imgProjeto {
+            background-size: cover;
+            width: 100%;
+            height: 154px;
+        }
+
+        span {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+
+            img {
+                height: 35px;
+                width: 35px;
+            }
+        }
+    }
+
+    &__body {
+        background-color: #fff;
+        padding: 10px 16px 21px 16px;
+        border: 1px solid #d5dae0;
+        border-radius: 0px 0px 25px 25px;
+
+        &--title {
+            display: flex;
+            justify-content: space-between;
+
+            .left {
+                h2 {
+                    font-size: 16px;
+                    color: #152544;
+                }
+
+                p {
+                    color: #9796b2;
+                    font-size: 14px;
+                }
+            }
+
+            .right {
+                img {
+                    height: 18px;
+                    width: 18px;
+                }
+
+                span {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &--localizacao {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+
+            img {
+                margin-right: 4px;
+            }
+
+            p {
+                color: #342ead;
+                font-size: 14px;
+                margin-top: 5px;
+            }
+        }
+
+        &--meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+
+            .left {
+                p {
+                    color: #ffbd00;
+                    font-size: 16px;
+                    font-weight: bold;
+
+                    span {
+                        margin-left: 5px;
+                        color: #626b80;
+                        font-size: 12px;
+                        font-weight: normal;
+                    }
+                }
+            }
+
+            .right {
+                p {
+                    font-size: 12px;
+
+                    span {
+                        color: #ffbd00;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+
+        &--porcentagem {
+            background-color: #d5dae0;
+            border-radius: 25px;
+            height: 8px;
+            width: 100%;
+            margin-bottom: 16px;
+
+            .qtd-percent {
+                background-color: #342ead;
+                border-radius: 25px;
+                height: 8px;
+                transition: all 1s ease-in-out;
+                width: 60%;
+            }
+        }
+
+        &--socialInfo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .left {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                div {
+                    background-color: #efeff8;
+                    border-radius: 17px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px 10px;
+                    margin-right: 8px;
+
+                    span {
+                        color: #342ead;
+                        font-size: 22px;
+                        margin-right: 6px;
+                    }
+
+                    p {
+                        color: #2e4765;
+                        font-size: 12px;
+                    }
+                }
+            }
+
+            .right {
+                display: flex;
+                align-items: center;
+
+                span {
+                    color: #D5DAE0;
+                    margin-right: 6px;
+                    font-size: 19px;
+                }
+
+                p {
+                    color: #2e4765;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
