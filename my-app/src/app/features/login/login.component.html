@@ -8,11 +8,11 @@
       <h2>Entre e ajude pessoas a terem uma vida mais digna. Promova Amor.</h2>
 
       <div class="login-page__right--socialMedia">
-        <div class="item">
+        <div class="item" (click)="fazerLoginFacebook()">
           <img src="/assets/img/icon/facebook.svg" alt="" srcset="">
           <p>Facebook</p>
         </div>
-        <div class="item">
+        <div class="item" (click)="fazerLoginGoogle()">
           <img src="/assets/img/icon/google.svg" alt="" srcset="">
           <p>Google</p>
         </div>
@@ -45,7 +45,7 @@
                 <a href="#">Esqueceu sua senha ?</a>
               </div>
 
-              <button mat-raised-button color="primary" [disabled]="!formLogin.valid">
+              <button mat-raised-button color="primary" [disabled]="!formLogin.valid" (click)="fazerLogin()">
                 Avançar
                 <mat-icon matPrefix>arrow_forward</mat-icon>
               </button>

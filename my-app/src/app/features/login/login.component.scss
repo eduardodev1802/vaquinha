@@ -55,6 +55,7 @@
       margin-bottom: 20px;
 
       .item {
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -63,6 +64,11 @@
         border-radius: 4px;
         height: 35px;
         width: 45%;
+
+        &:hover {
+          transform: translateY(-3px);
+          transition: all 300ms ease;
+        }
 
         img {
           margin-right: 15px;

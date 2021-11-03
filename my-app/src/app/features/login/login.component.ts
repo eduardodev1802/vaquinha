@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map, tap } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/core/services/auth/authentication.service';
 
 
 @Component({
@@ -13,9 +16,23 @@ export class LoginComponent implements OnInit {
   formCadastro!: FormGroup;
 
   constructor(
+    private fb: FormBuilder,
+    private authService: AuthenticationService,
+    private authAngular: AngularFireAuth,
     private router: Router,
-    private fb: FormBuilder
-  ) { }
+  ) {
+    this.authAngular.authState.subscribe(res => {
+      if (res && res.uid) {
+        console.log('user is logged in');
+        this.router.navigate(['/']);
+        return true;
+      } else {
+        this.router.navigate(['/login']);
+        console.log('user is not logged in');
+        return false;
+      }
+    });
+  }
 
   ngOnInit() {
     this.inicializarFormularioLogin();
@@ -47,4 +64,16 @@ export class LoginComponent implements OnInit {
   public checkErrorCadastro = (controlName: string, errorName: string) => {
     return this.formCadastro.controls[controlName].hasError(errorName);
   };
+
+  fazerLogin() {
+    this.authService.login(this.formLogin.value.email, this.formLogin.value.password);
+  }
+
+  fazerLoginGoogle() {
+    this.authService.GoogleAuth();
+  }
+
+  fazerLoginFacebook() {
+    this.authService.FacebookAuth();
+  }
 }

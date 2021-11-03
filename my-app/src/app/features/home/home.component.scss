@@ -30,18 +30,26 @@
                 margin-right: 12px;
                 width: 100%;
 
-                span {
-                    color: #6d7e8f;
+                .bola-pesquisar {
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #342ead;
+                    border-radius: 50%;
+                    height: 40px;
+                    width: 40px;
                     position: absolute;
-                    top: 15px;
-                    left: 15px;
+                    top: 6px;
+                    right: 10px;
+                    color: #fff;
                 }
 
                 input {
                     color: #6d7e8f;
                     border: none;
                     border-radius: 25px;
-                    padding-left: 73px;
+                    padding-left: 15px;
                     height: 50px;
                     width: 100%;
                 }

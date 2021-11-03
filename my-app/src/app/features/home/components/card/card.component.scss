@@ -1,14 +1,28 @@
 .card {
-  
-
     &__header {
         max-height: 154px;
         position: relative;
 
         &--imgProjeto {
-            background-size: cover;
+            border-radius: 4px 4px 0px 0px;
             width: 100%;
             height: 154px;
+
+            img {
+                border-radius: 4px 4px 0px 0px;
+                object-fit: cover;
+                height: 154px;
+                width: 100%;
+            }
+
+            video {
+                border-radius: 4px 4px 0px 0px;
+                height: 156px;
+            }
+
+            iframe {
+                border-radius: 4px 4px 0px 0px;
+            }
         }
 
         span {
@@ -117,8 +131,7 @@
                 background-color: #342ead;
                 border-radius: 25px;
                 height: 8px;
-                transition: all 1s ease-in-out;
-                width: 60%;
+                transition: width 1s ease-in-out;
             }
         }
 
@@ -159,7 +172,7 @@
                 align-items: center;
 
                 span {
-                    color: #D5DAE0;
+                    color: #d5dae0;
                     margin-right: 6px;
                     font-size: 19px;
                 }

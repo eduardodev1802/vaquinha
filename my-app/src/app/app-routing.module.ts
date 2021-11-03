@@ -7,10 +7,10 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '',
+    redirectTo: '/',
   },
   {
-    path: 'home',
+    path: '',
     loadChildren: () =>
       import('./features/home/home.module').then((m) => m.HomeModule),
   },
@@ -18,7 +18,6 @@ const routes: Routes = [
     path: 'projeto',
     loadChildren: () =>
       import('./features/projeto/projeto.module').then((m) => m.ProjetoModule),
-    // canActivate: [AuthGuard],
   },
   {
     path: 'login',

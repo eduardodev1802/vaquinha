@@ -15,9 +15,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { DefaultInterceptor } from './core/interceptors/default.interceptor';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { SafePipe } from './pipes/safe.pipe'
+
+const config = {
+  apiKey: 'AIzaSyB5RIlZglPp94YSJj2mahammMuymjMyjyc',
+  authDomain: 'segundo-mandamento.firebaseapp.com',
+  databaseURL: 'https://segundo-mandamento.firebaseio.com',
+  projectId: 'segundo-mandamento',
+  storageBucket: 'segundo-mandamento.appspot.com',
+  messagingSenderId: "951754193636",
+  appId: "1:951754193636:web:873de900a2a752b5730af1",
+  measurementId: "G-1B8R1NB69Y"
+};
 
 registerLocaleData(localePt, 'pt-BR');
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +48,10 @@ registerLocaleData(localePt, 'pt-BR');
       instrumentationKey: '',
       properties: {},
     }),
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },

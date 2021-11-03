@@ -10,9 +10,10 @@ import { environment } from 'src/environments/environment';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
-  declarations: [MainLayoutComponent, NavComponent],
+  declarations: [MainLayoutComponent, NavComponent, FooterComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
