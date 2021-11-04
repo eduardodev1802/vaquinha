@@ -99,8 +99,14 @@ export class HomeComponent implements OnInit {
       longitude: null
     }
 
+
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+
+
+        console.log('Entrou aqui location')
+
         this.buscarProjetos(position.coords.latitude, position.coords.longitude, filtroUF)
       });
     } else {

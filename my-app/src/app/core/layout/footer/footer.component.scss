@@ -4,8 +4,20 @@
     padding: 74px 25px;
     border: 1px solid #545454;
 
+    @media (max-width: 768px) {
+        padding: 40px 15px;
+        flex-direction: column;
+    }
+
     .left {
         margin-right: 100px;
+
+        
+        @media (max-width: 768px) {
+            margin-right: 0px;
+            margin-bottom: 32px;
+        }
+
 
         .titulo-logo {
             display: flex;
@@ -34,6 +46,12 @@
 
     .center {
         margin-right: 100px;
+
+        
+        @media (max-width: 768px) {
+            margin-right: 0px;
+            margin-bottom: 32px;
+        }
 
         h3 {
             font-size: 16px;

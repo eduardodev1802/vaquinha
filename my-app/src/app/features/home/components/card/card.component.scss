@@ -179,6 +179,10 @@
                 display: flex;
                 align-items: center;
 
+                @media (max-width: 768px) {
+                    display: none;
+                }
+
                 span {
                     color: #d5dae0;
                     margin-right: 6px;

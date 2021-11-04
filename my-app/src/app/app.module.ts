@@ -20,8 +20,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { TruncatePipe } from './pipes/truncate.pipe';
-import { SafePipe } from './pipes/safe.pipe'
+
 
 const config = {
   apiKey: 'AIzaSyB5RIlZglPp94YSJj2mahammMuymjMyjyc',
