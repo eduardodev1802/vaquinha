@@ -16,16 +16,40 @@
           <span class="material-icons bola-pesquisar" (click)="pesquisarProjeto()">
             search
           </span>
-          <input type="text" (input)="verificarInputPesquisa()" [(ngModel)]="query" placeholder="Pesquise por Titulo, Descrição ou Responsável">
+          <input type="text" (input)="verificarInputPesquisa()" [(ngModel)]="query"
+            placeholder="Pesquise por Titulo, Descrição ou Responsável">
         </div>
 
-        <div class="tune">
+        <div class="tune" [matMenuTriggerFor]="menu">
           <span class="material-icons">
             tune
           </span>
         </div>
       </div>
 
+    </div>
+
+    <div class="home-page__mapsProject">
+      <div class="home-page__mapsProject--left">
+        <h3>Categorias</h3>
+
+        <div class="list-categorias">
+          <ul>
+            <li [ngClass]="{active: categoriaEscolhida === null}" (click)="mudarCategoriaProjeto(null)">
+              <span>Todas</span>
+            </li>
+            <li *ngFor="let item of categorias" (click)="mudarCategoriaProjeto(item.id)"
+              [ngClass]="{active: item.id === categoriaEscolhida}"><span>{{ item.title }}</span></li>
+          </ul>
+
+          <button mat-raised-button color="primary" (click)="escolherCategoriaProjeto()">Confirmar</button>
+        </div>
+      </div>
+
+
+      <div class="home-page__mapsProject--right">
+        <div #gmap style="width:100%;height:100%"></div>
+      </div>
     </div>
 
     <div class="home-page__listProjet">
@@ -57,3 +81,14 @@
     </div>
   </div>
 </div>
+
+
+<mat-menu #menu="matMenu" class="">
+  <h3 class="title-uf">Filtrar por região</h3>
+  <ul class="list-filter-uf">
+    <li (click)="filtrarPorUF(null)">Todos os estados</li>
+    <li *ngFor="let item of estados" (click)="filtrarPorUF(item)">
+      {{ item.uf }}
+    </li>
+  </ul>
+</mat-menu>

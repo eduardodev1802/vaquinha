@@ -18,19 +18,27 @@ export class HomeService {
   constructor(private http: HttpClient) { }
 
 
-  getProjects(pageNumber: number, query: string, sort: string) {
+  getProjects(pageNumber: number, query: string, sort: string, categoria: string, latidude: any, longitude: any, uf: any) {
     let url;
 
-    if (sort === null && query === null) {
-      url = `project/search?lat=15.7965037&lon=47.8859936&start=${pageNumber}&pageSize=6&`
+    if (sort === null && query === null && categoria === null && uf === null) {
+      url = `project/search?lat=${latidude}&lon=${longitude}&start=${pageNumber}&pageSize=6&`
     }  
     
-    if (sort && query === null) {
-      url = `project/search?lat=15.7965037&lon=47.8859936&start=${pageNumber}&pageSize=6&sort=${sort}`
+    if (sort && query === null && categoria === null && uf === null) {
+      url = `project/search?lat=${latidude}&lon=${longitude}&start=${pageNumber}&pageSize=6&sort=${sort}`
     } 
     
-    if(query && sort === null) {
-      url = `project/search?lat=15.7965037&lon=47.8859936&start=${pageNumber}&pageSize=6&qry=${query}`
+    if(query && sort === null && categoria === null && uf === null) {
+      url = `project/search?lat=${latidude}&lon=${longitude}&start=${pageNumber}&pageSize=6&qry=${query}`
+    }
+
+    if(categoria !== null && query === null && sort === null && uf === null) {
+      url = `project/search?lat=${latidude}&lon=${longitude}&start=${pageNumber}&pageSize=6&subjectsIds=${categoria}`
+    }
+
+    if(uf !== null && query === null && sort === null && categoria === null) {
+      url = `project/search?lat=${latidude}&lon=${longitude}&start=${pageNumber}&pageSize=6&uf=${uf.uf}`
     }
 
     return this.http.get<any>(`${environment.apiUrl}${url}`, {
@@ -40,4 +48,23 @@ export class HomeService {
         return resp;
       }));
   }
+
+  getEstados() {
+    return this.http.get<any>(`${environment.apiUrl}address/states`, {
+      headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
+  getCategorias() {
+    return this.http.get<any>(`${environment.apiUrl}project/subjects`, {
+      headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
 }

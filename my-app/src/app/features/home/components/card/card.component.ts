@@ -1,6 +1,7 @@
 import { trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HomeService } from '../../domains/services/projeto/home.service';
 
 
 
@@ -16,10 +17,13 @@ export class CardComponent implements OnInit {
   // 2 - IMAGEM
   // 3 - VIDEO
   @Input() projeto: any;
+  categorias: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private homeService: HomeService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+  }
 
   arredondarKM(km: number) {
     return Math.round(km);
@@ -47,24 +51,12 @@ export class CardComponent implements OnInit {
   irParaProjeto() {
     this.router.navigate([`/projeto/detalhe/${this.projeto.id}`]);
   }
-}
-function transition(arg0: string, arg1: any[]): import("@angular/animations").AnimationMetadata {
-  throw new Error('Function not implemented.');
-}
 
-function style(arg0: { transform: string; opacity: number; }): any {
-  throw new Error('Function not implemented.');
-}
+  procurarCategoria(id: number) {
 
-function animate(arg0: string, arg1: any): any {
-  throw new Error('Function not implemented.');
-}
+    let listaCategorias = [{"id":1,"title":"Alimentos","active":true},{"id":2,"title":"Construção","active":true},{"id":3,"title":"Luz","active":true},{"id":4,"title":"Mobiliário","active":true},{"id":5,"title":"Reforma","active":true},{"id":6,"title":"Remédios","active":true},{"id":7,"title":"Saúde","active":true},{"id":8,"title":"Tratamento","active":true},{"id":9,"title":"Vestuário","active":true}]
 
-function query(arg0: string, arg1: any[], arg2: { optional: boolean; }): any {
-  throw new Error('Function not implemented.');
+    let categoria: any = listaCategorias.find(categoria => categoria.id === id);
+    return categoria.title;
+  }
 }
-
-function stagger(arg0: string, arg1: any): any {
-  throw new Error('Function not implemented.');
-}
-

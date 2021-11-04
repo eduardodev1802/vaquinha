@@ -6,12 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './components/card/card.component';
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [SafePipe, TruncatePipe, HomeComponent, CardComponent],
-  imports: [SharedModule, HomeRoutingModule, MatButtonModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, HomeRoutingModule, MatButtonModule, FormsModule, ReactiveFormsModule, MatMenuModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomeModule {}
+export class HomeModule { }

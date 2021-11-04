@@ -72,6 +72,83 @@
         }
     }
 
+    &__mapsProject {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 58px;
+
+        &--left {
+            position: relative;
+            background-color: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            height: 369px;
+            width: 30%;
+
+            &::after {
+                content: "";
+                background-image: url("/assets/img/bg/bg-pessoas.png");
+                position: absolute;
+                bottom: 0;
+                height: 85px;
+                width: 100%;
+                background-size: cover;
+                z-index: 2;
+                left: 0;
+            }
+
+            h3 {
+                color: #2e4765;
+                font-size: 15px;
+                font-weight: normal;
+                margin-bottom: 18px;
+            }
+
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+
+                li {
+                    cursor: pointer;
+                    color: #96a3b2;
+                    font-size: 14px;
+                    margin-bottom: 12px;
+                    width: 50%;
+
+                    &.active {
+                        span {
+                            padding: 6px 15px;
+                            border-radius: 16px;
+                            background-color: #342ead;
+                            font-weight: bold;
+                            color: #ecedf9;
+                        }
+                    }
+                }
+            }
+
+            button {
+                z-index: 3;
+                background-color: #342ead;
+                color: #fff;
+                position: absolute;
+                bottom: 20px;
+                display: block;
+                margin: 0 auto;
+                width: 60%;
+                height: 45px;
+                left: 0;
+                right: 0;
+                border-radius: 90px;
+            }
+        }
+
+        &--right {
+            width: 68%;
+        }
+    }
+
     &__listProjet {
         &--results {
             display: flex;
@@ -162,6 +239,35 @@
                     color: #fff;
                 }
             }
+        }
+    }
+}
+
+.title-uf {
+    color: #2e4765;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 18px;
+    padding: 15px 25px 0 25px;
+}
+
+.list-filter-uf {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 15px 25px 0 25px;
+
+    li {
+        cursor: pointer;
+        color: #96a3b2;
+        font-size: 14px;
+        margin-bottom: 12px;
+        width: 33%;
+        color: #342ead;
+
+        &:hover {
+            color: #342ead;
+            font-weight: bold;
         }
     }
 }
