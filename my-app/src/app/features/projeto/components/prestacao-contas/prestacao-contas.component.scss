@@ -1,0 +1,48 @@
+.prestacao-page {
+
+    h3 {
+        color: #2E4765;
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    .imagem {
+        width: 100%;
+        padding: 0 40px;
+        margin-bottom: 40px;
+
+        @media (max-width: 992px) {
+            padding: 0 15px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .youtube {
+        padding: 0 40px;
+        margin-bottom: 40px;
+
+        @media (max-width: 992px) {
+            padding: 0 15px;
+        }
+    }
+
+    .video {
+        padding: 0 40px;
+        margin-bottom: 40px;
+
+        @media (max-width: 992px) {
+            padding: 0 15px;
+        }
+    }
+    
+    .not-found {
+        margin-bottom: 100px;
+        
+        h3 {
+            font-weight: normal;
+        }
+    }
+}

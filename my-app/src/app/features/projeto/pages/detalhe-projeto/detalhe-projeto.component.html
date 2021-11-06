@@ -1,8 +1,17 @@
 <div class="container" *ngIf="projetoData">
     <div class="detalhe">
         <div class="detalhe__left">
-            <img src="http://www.agenciabrasilia.df.gov.br/wp-conteudo/uploads/2019/09/20.9.-Sa%C3%BAde.-FOTO-BRENO-ESAKI-SA%C3%9ADE-DF-3-1.jpg"
-                alt="" srcset="">
+            <img [src]="projetoData.result[0].thumb" alt="" srcset="" *ngIf="projetoData.result[0].mime === 2">
+
+            <div *ngIf="projetoData.result[0].mime === 3">
+                <video width="100%" height="100%" [src]="projetoData.result[0].endereco" controls>
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+
+            <div *ngIf="projetoData.result[0].mime === 1" class="video-youtube">
+                <iframe width="100%" height="100%" [src]="montarIframeYoutube(projetoData.result[0].endereco) | safedois"></iframe>
+            </div>
         </div>
 
         <div class="detalhe__right">
@@ -47,51 +56,51 @@
 
             <div class="detalhe__right--autor">
                 <div class="avatar">
-                    <img src="/assets/img/avatar-mock.svg" alt="" srcset="">
-                    <h3>Márcia Leónidas</h3>
+                    <img [src]="projetoData.result[0].owner.fotoUsuario" alt="" srcset="">
+                    <h3>{{ projetoData.result[0].owner.nome }}</h3>
                 </div>
 
-                <a href="#">
+                <!-- <a href="#">
                     <mat-icon aria-hidden="false" aria-label="Example home icon">public</mat-icon>
                     ver projetos
-                </a>
+                </a> -->
             </div>
 
             <div class="detalhe__right--socialMedia">
                 <h3>Compartilhe com seus amigos</h3>
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=#{{urlCompartilhamento}}" target="_blank">
                             <img src="/assets/img/icon/facebook-shared.svg" alt="" srcset="">
                         </a>
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a target="_blank" href="https://twitter.com/intent/tweet?text={{urlCompartilhamento}}">
                             <img src="/assets/img/icon/twiiter-shared.svg" alt="" srcset="">
                         </a>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <a href="#">
                             <img src="/assets/img/icon/email-shared.svg" alt="" srcset="">
                         </a>
-                    </li>
-
+                    </li> -->
+<!-- 
                     <li>
                         <a href="#">
                             <img src="/assets/img/icon/messager-shared.svg" alt="" srcset="">
                         </a>
-                    </li>
+                    </li> -->
 
                     <li>
-                        <a href="#">
+                        <a href="https://api.whatsapp.com/send?text={{urlCompartilhamento}}" target="_blank">
                             <img src="/assets/img/icon/whats-shared.svg" alt="" srcset="">
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#">
+                    <li (click)="compartilharInstagram()">
+                        <a>
                             <img src="/assets/img/icon/instagram-shared.svg" alt="" srcset="">
                         </a>
                     </li>
@@ -116,9 +125,9 @@
 
         <div class="conteudo">
             <app-descricao *ngIf="tabDetalhe === 1" [descricao]="projetoData.result[0].description"></app-descricao>
-            <app-prestacao-contas *ngIf="tabDetalhe === 2"></app-prestacao-contas>
+            <app-prestacao-contas *ngIf="tabDetalhe === 2" [listaPrestacaoData]="listaPrestacaoContas"></app-prestacao-contas>
             <app-contribuicoes *ngIf="tabDetalhe === 3" [contribuicoes]="listaContribuicao"></app-contribuicoes>
-            <app-historico *ngIf="tabDetalhe === 4" [historico]="timelineData"></app-historico>
+            <app-historico *ngIf="tabDetalhe === 4" [historico]="listaProjetosUsuario"></app-historico>
             <app-comentarios *ngIf="tabDetalhe === 5" [comentarios]="ListaComentarios"></app-comentarios>
         </div>
     </div>

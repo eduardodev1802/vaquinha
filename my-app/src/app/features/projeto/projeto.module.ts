@@ -7,6 +7,7 @@ import { DetalheProjetoComponent } from './pages/detalhe-projeto/detalhe-projeto
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { DescricaoComponent } from './components/descricao/descricao.component';
@@ -14,9 +15,13 @@ import { PrestacaoContasComponent } from './components/prestacao-contas/prestaca
 import { ContribuicoesComponent } from './components/contribuicoes/contribuicoes.component';
 import { HistoricoComponent } from './components/historico/historico.component';
 import { ComentariosComponent } from './components/comentarios/comentarios.component';
+import { SafePipe } from 'src/app/pipes/safe.pipe';
+import { SafeDoisPipe } from 'src/app/pipes/safe-2.pipe';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
+    SafeDoisPipe,
     DetalheProjetoComponent,
     DescricaoComponent,
     PrestacaoContasComponent,
@@ -29,8 +34,10 @@ import { ComentariosComponent } from './components/comentarios/comentarios.compo
     ProjetoRoutingModule,
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule,
     MatExpansionModule,
     NgCircleProgressModule,
+    ClipboardModule,
     NgCircleProgressModule.forRoot({
       radius: 100,
       outerStrokeWidth: 16,

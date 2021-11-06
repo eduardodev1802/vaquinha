@@ -1,1 +1,40 @@
-<p>historico works!</p>
+<div class="historico" *ngIf="historico">
+    <div class="listaHistorico" *ngFor="let item of historico.result">
+        <div class="card-data">
+            <span [ngClass]="{ativo: item.status === 'A', inativo: item.status === 'F'}"></span>
+            <h3>Data</h3>
+            <p>{{ item.finishDateTime }}</p>
+        </div>
+
+        <div class="card-openClose">
+            <span class="material-icons" *ngIf="item.status === 'A'">
+                meeting_room
+            </span>
+
+            <span class="material-icons" *ngIf="item.status === 'F'">
+                sensor_door
+            </span>
+        </div>
+
+        <div class="card" (click)="irParaProjeto(item)">
+            <div class="header">
+                <img [src]="item.thumb" alt="" srcset="" *ngIf="item.mime === 2">
+
+                <div *ngIf="item.mime === 3">
+                    <video width="100%" height="100%" [src]="item.endereco" controls>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+
+                <div *ngIf="item.mime === 1">
+                    <iframe width="100%" [src]="montarIframeYoutube(item.endereco) | safedois"></iframe>
+                </div>
+            </div>
+
+            <div class="body">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>

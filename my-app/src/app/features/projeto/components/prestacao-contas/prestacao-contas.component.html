@@ -1,1 +1,35 @@
-<p>prestacao-contas works!</p>
+<div class="prestacao-page">
+    <h3>Prestações de conta</h3>
+
+    <div class="prestacao-page__list" *ngIf="listaPrestacaoData.length">
+        <div class="prestacao-page__list--content" *ngFor="let item of listaPrestacaoData">
+            <h3>{{ item.onwer.nome }}</h3>
+
+            <div class="list-contribuicoes" *ngFor="let contribuicao of item.value2">
+                <div class="text" *ngIf="contribuicao.itemType === 'R'">
+                    <p>{{ contribuicao.value }}</p>
+                </div>
+
+                <br>
+
+                <div class="video" *ngIf="contribuicao.itemType === 'V'">
+                    <video width="100%" [src]="contribuicao.detalheContribuicao.address" controls>
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+
+                <div class="youtube" *ngIf="contribuicao.itemType === 'Y'">
+                    <iframe width="100%" height="100%" [src]="montarIframeYoutube(contribuicao.detalheContribuicao.address) | safedois"></iframe>
+                </div>
+
+                <div class="imagem" *ngIf="contribuicao.itemType === 'I'">
+                   <img [src]="contribuicao.detalheContribuicao.address" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="not-found" *ngIf="!listaPrestacaoData.length">
+        <h3>Ainda não foi registrada nenhuma prestação de contas.</h3>
+    </div>
+</div>

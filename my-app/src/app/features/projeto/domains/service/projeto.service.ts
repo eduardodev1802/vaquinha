@@ -3,6 +3,8 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { FirebaseAuth } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable({
@@ -17,7 +19,9 @@ export class ProjetoService {
       'Authorization': 'my-auth-token'
     })
   };
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient, private authAngular: AngularFireAuth,) { }
 
   getProjetoDetalhe(id: any) {
     return this.http.get<any>(`${environment.apiUrl}project/by-ids/${id}?from=0&pageSize=-1&lat=0&lon=0`, {
@@ -67,6 +71,30 @@ export class ProjetoService {
   getTimeLine(id: any) {
     return this.http.get<any>(`${environment.apiUrl}project/from-user/${id}?from=0&pageSize=10&lat=-15.83&lon=-47.86`, {
       headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
+
+  getPrestacaoContas(id: any) {
+    return this.http.get<any>(`${environment.apiUrl}done-reports/P/${id}`, {
+      headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
+  getTodosProjetos(id: any, token: string) {
+
+
+    return this.http.get<any>(`${environment.apiUrl}sec/project/from-user/${id}?from=0&pageSize=10&lat=-15.83&lon=-47.86&`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `token ${token}`
+      })
     })
       .pipe(map(resp => {
         return resp;

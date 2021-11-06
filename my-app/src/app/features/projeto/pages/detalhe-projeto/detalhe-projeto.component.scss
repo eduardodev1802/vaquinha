@@ -3,20 +3,47 @@
     justify-content: space-between;
     margin-bottom: 24px;
 
+    @media (max-width: 992px) {
+        flex-direction: column;
+    }
+
     &__left {
         width: 65%;
+
+        @media (max-width: 992px) {
+            width: 100%;
+        }
 
         img {
             object-fit: cover;
             height: 368px;
             width: 100%;
             max-width: 100%;
+
+            img {
+                @media (max-width: 992px) {
+                    font-size: 18px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .video-youtube {
+
+            iframe {
+                height: 390px;
+            }
         }
     }
 
     &__right {
         padding-left: 50px;
         width: 40%;
+
+        @media (max-width: 992px) {
+            padding: 0 15px;
+            width: 100%;
+        }
 
         &--arrecadacao {
             display: flex;
@@ -105,7 +132,7 @@
                 img {
                     margin-right: 8px;
                     border-radius: 50%;
-                    object-fit: contain;
+                    object-fit: cover;
                     height: 40px;
                     width: 40px;
                 }
@@ -147,6 +174,10 @@
                 font-size: 16px;
                 font-weight: normal;
                 margin-bottom: 12px;
+
+                @media (max-width: 992px) {
+                    text-align: center;
+                }
             }
 
             ul {
@@ -171,6 +202,11 @@
     h2 {
         color: #2e4765;
         font-size: 34px;
+
+        @media (max-width: 992px) {
+            font-size: 18px;
+            text-align: center;
+        }
     }
 }
 
@@ -179,6 +215,13 @@
         display: flex;
         border-bottom: 1px solid #c5b2b2;
         margin-bottom: 32px;
+
+        @media (max-width: 992px) {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 0 15px 20px 15px;
+        }
 
         .tab {
             cursor: pointer;
@@ -199,6 +242,12 @@
                 font-weight: 500;
             }
         }
+    }
+}
+
+.conteudo {
+    @media (max-width: 992px) {
+        padding: 0 15px;
     }
 }
 

@@ -6,7 +6,9 @@
         <div class="comentarios-page__list--card" *ngFor="let item of comentarios">
             <div class="header">
                 <div class="left">
-                    <div class="avatar"></div>
+                    <div class="avatar">
+                        <img *ngIf="item.endereco" [src]="item.endereco" alt="" srcset="">
+                    </div>
                     <div class="info">
                         <h4>{{ item.user.nome }}</h4>
                         <p>{{ item.comment.comment }}</p>
@@ -28,7 +30,9 @@
 
                     <div class="header">
                         <div class="left">
-                            <div class="avatar"></div>
+                            <div class="avatar">
+                                <img *ngIf="resposta.endereco" [src]="resposta.endereco" alt="" srcset="">
+                            </div>
                             <div class="info">
                                 <h4>{{ resposta.user.nome }}</h4>
                                 <p>{{ resposta.comment.comment }}</p>
@@ -48,5 +52,9 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="not-found" *ngIf="!comentarios.length">
+        <p>Ainda ninguem comentou, seja o primeiro :)</p>
     </div>
 </div>
