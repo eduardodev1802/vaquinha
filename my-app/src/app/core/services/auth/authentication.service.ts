@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { auth } from 'firebase';
+import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalMsgComponent } from 'src/app/features/login/components/modal-msg/modal-msg.component';
 
 
 @Injectable({ providedIn: 'root' })
@@ -26,8 +29,11 @@ export class AuthenticationService {
             .then((user: any) => {
                 this.router.navigate(['/home']);
             })
-            .catch(function (error) { });
+            .catch(function (error) {
+                window.alert(error.message)
+             });
     }
+
 
     GoogleAuth() {
         return this.loginGoogle(new auth.GoogleAuthProvider());
@@ -59,4 +65,20 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
+    httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'my-auth-token'
+        })
+      };
+
+    cadastrarUsuario(payload: any) {
+        return this.http.post<any>(`${environment.apiUrl}create-user`, payload, {
+          headers: this.httpOptions.headers
+        })
+          .pipe(map(resp => {
+            return resp;
+          }));
+      }
 }

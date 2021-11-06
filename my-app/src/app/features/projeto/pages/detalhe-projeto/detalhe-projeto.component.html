@@ -48,9 +48,14 @@
             </div>
 
             <div class="detalhe__right--contribuir">
-                <button mat-raised-button color="primary">
+                <button mat-raised-button color="primary" *ngIf="projetoData.result[0].status === 'A'">
                     <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up_alt</mat-icon>
                     Quero ajudar uma vida
+                </button>
+
+                <button class="encerrado" mat-raised-button color="secondary" [disabled]="projetoData.result[0].status === 'F'" *ngIf="projetoData.result[0].status === 'F'">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">highlight_off</mat-icon>
+                    Projeto Encerrado
                 </button>
             </div>
 

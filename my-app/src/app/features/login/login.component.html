@@ -19,7 +19,7 @@
       </div>
 
       <div class="login-page__right--groupLogin">
-        <mat-tab-group mat-align-tabs="start">
+        <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="selected">
           <mat-tab label="Entre Agora">
 
             <form [formGroup]="formLogin">
@@ -84,7 +84,7 @@
               <div class="form-group">
                 <mat-icon matPrefix>date_range</mat-icon>
                 <mat-form-field class="example-full-width" appearance="legacy">
-                  <input matInput placeholder="Data de Nascimento" formControlName="data">
+                  <input matInput placeholder="Data de Nascimento" formControlName="data" mask="00/00/0000">
                   <mat-error *ngIf="checkErrorCadastro('data', 'required')">Data de nascimento é obrigatória</mat-error>
                 </mat-form-field>
               </div>
@@ -113,7 +113,7 @@
                 </mat-form-field>
               </div>
 
-              <button mat-raised-button color="primary" [disabled]="!formCadastro.valid">
+              <button mat-raised-button color="primary" (click)="cadastrarUsuario()" [disabled]="!formCadastro.valid">
                 Avançar
                 <mat-icon matPrefix>arrow_forward</mat-icon>
               </button>

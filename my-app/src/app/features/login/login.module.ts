@@ -8,12 +8,15 @@ import { LoginComponent } from './login.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { ModalCadastroComponent } from './components/modal-cadastro/modal-cadastro.component';
+import { ModalMsgComponent } from './components/modal-msg/modal-msg.component';
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [CommonModule, LoginRoutingModule, SharedModule, MatTabsModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule,
+  declarations: [LoginComponent, ModalCadastroComponent, ModalMsgComponent],
+  imports: [CommonModule, MatDialogModule, LoginRoutingModule, SharedModule, MatTabsModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule,
     MatButtonModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -29,7 +29,6 @@
         }
 
         .video-youtube {
-
             iframe {
                 height: 390px;
             }
@@ -96,6 +95,15 @@
         &--contribuir {
             margin-bottom: 24px;
 
+            @media (max-width: 992px) {
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                left: 0;
+                margin-bottom: 0px;
+                width: 100%;
+            }
+
             button {
                 position: relative;
                 background-color: #342ead;
@@ -104,12 +112,21 @@
                 font-size: 16px;
                 width: 100%;
 
+                @media (max-width: 992px) {
+                    border-radius: 0px;
+                }
+
                 &:hover {
                     transition: all 200ms ease;
                     background-color: #fff;
                     border: 1px solid #342ead;
                     color: #342ead;
                 }
+            }
+
+            .encerrado {
+                background-color: #f4f6fc;
+                border: 2 px solid #342ead;
             }
 
             mat-icon {

@@ -45,6 +45,8 @@ export class DetalheProjetoComponent implements OnInit {
       this.getComentarios(this.idProjeto);
       this.getContribuicoes(this.idProjeto)
       this.getTimeline(this.projetoData);
+
+      console.log('PROJETO DATA', this.projetoData);
     })
   }
 

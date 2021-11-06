@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav',
@@ -7,15 +8,24 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
   showNav = false;
-  logoUrl =
-    'https://raw.githubusercontent.com/wizsolucoes/angular-white-label-schematic/master/docs/logowiz.png';
+  logoUrl: any = null;
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private authAngular: AngularFireAuth,
   ) {}
 
   ngOnInit(): void {
-    
+    this.authAngular.authState.subscribe((res: any) => {
+      if (res && res.uid) {
+        this.logoUrl = res.photoURL;
+        
+        return true;
+      } else {
+      
+        return false;
+      }
+    });
   }
 
   logOut(): void {

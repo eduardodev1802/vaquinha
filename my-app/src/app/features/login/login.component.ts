@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/services/auth/authentication.service';
+import { ModalCadastroComponent } from './components/modal-cadastro/modal-cadastro.component';
+import { ModalMsgComponent } from './components/modal-msg/modal-msg.component';
 
 
 @Component({
@@ -14,12 +17,14 @@ import { AuthenticationService } from 'src/app/core/services/auth/authentication
 export class LoginComponent implements OnInit {
   formLogin!: FormGroup;
   formCadastro!: FormGroup;
+  selected = 0;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private authAngular: AngularFireAuth,
     private router: Router,
+    private dialog: MatDialog
   ) {
     this.authAngular.authState.subscribe(res => {
       if (res && res.uid) {
@@ -75,5 +80,42 @@ export class LoginComponent implements OnInit {
 
   fazerLoginFacebook() {
     this.authService.FacebookAuth();
+  }
+
+  cadastrarUsuario() {
+
+    let payload = {
+      "nome": this.formCadastro.value.nome,
+      "email": this.formCadastro.value.email,
+      "tipo": "F",
+      "dataNascimento": this.formCadastro.value.data,
+      "cpfCnpj": this.formCadastro.value.cpf,
+      "codigoPais": "+55",
+      "telefone": this.formCadastro.value.telefone,
+      "senha": this.formCadastro.value.senha,
+    }
+
+    this.authService.cadastrarUsuario(payload).subscribe((resp) => {
+      this.openDialog();
+    }, (err) => {
+      this.openDialogMSG(err.error);
+    })
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalCadastroComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     this.selected = 0;
+    });
+  }
+
+  openDialogMSG(msg: any): void {
+    const dialogRef = this.dialog.open(ModalMsgComponent, {
+      width: '250px',
+      data: { msg: msg },
+    });
   }
 }
