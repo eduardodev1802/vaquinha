@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjetoService } from '../../domains/service/projeto.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class DetalheProjetoComponent implements OnInit {
   urlCompartilhamento: any;
 
 
-  constructor(private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { }
+  constructor(private router: Router,  private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.urlCompartilhamento = window.location.href
@@ -198,6 +198,10 @@ export class DetalheProjetoComponent implements OnInit {
       duration: durationInSeconds * 1000,
     });
    
+  }
+
+  irParaPagamento() {
+    this.router.navigate([`/pagamento/detalhe/${this.idProjeto}`]);
   }
 }
 

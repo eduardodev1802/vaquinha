@@ -1,0 +1,180 @@
+.pagamento-page {
+  display: flex;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
+
+  &__left {
+    background-image: url("/assets/img/bg/bg-login.svg");
+    background-size: cover;
+    background-position: top center;
+    padding: 20px 80px;
+    width: 50%;
+
+    @media (max-width: 992px) {
+      height: 360px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: normal;
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 80px;
+    width: 50%;
+
+    @media (max-width: 992px) {
+      width: 100%;
+      background-color: #fff;
+      margin: -45px 0 0 0;
+      border-radius: 35px;
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+
+      @media (max-width: 992px) {
+        font-size: 24px;
+      }
+    }
+
+    &--socialMedia {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      .item {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        box-shadow: 1px 1px 1px #abb4bd;
+        border-radius: 4px;
+        height: 35px;
+        width: 45%;
+
+        &:hover {
+          transform: translateY(-3px);
+          transition: all 300ms ease;
+        }
+
+        img {
+          margin-right: 15px;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    &--groupLogin {
+      form {
+        padding: 30px 0;
+
+        .form-group {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+
+          mat-icon {
+            color: #342ead;
+            margin-top: -7px;
+            margin-right: 12px;
+          }
+        }
+
+        .forget-password {
+          display: flex;
+          justify-content: flex-end;
+          margin-bottom: 40px;
+          margin-top: -20px;
+
+          a {
+            color: #342ead;
+            font-size: 13px;
+          }
+        }
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        button {
+          background-color: #342ead;
+          color: #fff;
+          height: 45px;
+          border-radius: 6px;
+          width: 100%;
+
+          &:disabled {
+            opacity: 0.6;
+          }
+        }
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+
+        .tab {
+          position: relative;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #eeeeff;
+          border: 1px solid #342ead;
+          border-radius: 6px;
+          height: 45px;
+          width: 45%;
+
+          &.disabled {
+            opacity: 0.4;
+          }
+
+          img {
+            position: absolute;
+            left: 12px;
+
+            @media (max-width: 992px) {
+              height: 20px;
+              left: 5px;
+            }
+          }
+
+          p {
+            color: #342ead;
+            font-size: 14px;
+            font-weight: normal;
+
+            @media (max-width: 992px) {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.section-checkbox {
+  margin-bottom: 20px;
+}
+
+.mat-checkbox {
+  font-size: 10px;
+}

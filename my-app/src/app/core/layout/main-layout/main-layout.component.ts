@@ -15,6 +15,9 @@ export class MainLayoutComponent {
     if( this.router.url.includes('/login')) {
       return false;
     } 
+    if( this.router.url.includes('/pagamento')) {
+      return false;
+    } 
 
     return true;
   }

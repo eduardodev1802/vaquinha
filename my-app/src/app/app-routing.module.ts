@@ -25,6 +25,11 @@ const routes: Routes = [
       import('./features/login/login.module').then((m) => m.LoginModule),
   },
   {
+    path: 'pagamento',
+    loadChildren: () =>
+      import('./features/pagamento/pagamento.module').then((m) => m.PagamentoModule),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

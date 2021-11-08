@@ -48,7 +48,7 @@
             </div>
 
             <div class="detalhe__right--contribuir">
-                <button mat-raised-button color="primary" *ngIf="projetoData.result[0].status === 'A'">
+                <button mat-raised-button color="primary" (click)="irParaPagamento()" *ngIf="projetoData.result[0].status === 'A'">
                     <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up_alt</mat-icon>
                     Quero ajudar uma vida
                 </button>
