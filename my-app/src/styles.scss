@@ -7,16 +7,22 @@
 }
 
 body {
-  background-color: #F4F6FC;
-  font-family: 'Poppins', sans-serif !important;
+  background-color: #f4f6fc;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.barcode {
+  svg {
+    width: 100%;
+  }
 }
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 
 // Plus imports for other components in your app.
-@import './custom-component-themes.scss';
-@import './theme.scss';
-@import './assets/theme/containers.scss';
-@import './assets/theme/customize-components.scss';
+@import "./custom-component-themes.scss";
+@import "./theme.scss";
+@import "./assets/theme/containers.scss";
+@import "./assets/theme/customize-components.scss";

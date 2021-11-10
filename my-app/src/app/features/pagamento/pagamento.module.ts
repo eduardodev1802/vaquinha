@@ -11,6 +11,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginRoutingModule } from '../login/login-routing.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   imports: [
     CommonModule,
     FormsModule,
+    QRCodeModule,
     MatCheckboxModule,
+    NgxBarcodeModule,
     ReactiveFormsModule,
     PagamentoRoutingModule,
     MatDialogModule, LoginRoutingModule, SharedModule, MatTabsModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule,

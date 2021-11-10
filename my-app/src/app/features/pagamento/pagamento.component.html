@@ -73,7 +73,8 @@
                 </mat-form-field>
               </div>
 
-              <button mat-raised-button color="primary" [disabled]="!dadosPessoais.valid" (click)="avancarDadosPagamento()">
+              <button mat-raised-button color="primary" [disabled]="!dadosPessoais.valid"
+                (click)="avancarDadosPagamento()">
                 Avançar
                 <mat-icon matPrefix>arrow_forward</mat-icon>
               </button>
@@ -81,13 +82,240 @@
             </form>
           </mat-tab>
           <mat-tab label="Dados Pagamento">
-              <div class="tabs">
-                <div class="item">Cartão de crédito</div>
-                <div class="item">Pagamento Pix</div>
-                <div class="item">Boleto bancário</div>
+            <div class="tabs" *ngIf="metodoPagamento !== 3">
+              <div class="tab" (click)="escolherMetodoPagamento(0)" [ngClass]="{active: metodoPagamento === 0}">Cartão
+                de
+                crédito</div>
+              <div class="tab" (click)="escolherMetodoPagamento(1)" [ngClass]="{active: metodoPagamento === 1}">
+                Pagamento
+                Pix</div>
+              <div class="tab" (click)="escolherMetodoPagamento(2)" [ngClass]="{active: metodoPagamento === 2}">Boleto
+                bancário</div>
+            </div>
+
+            <div class="content-pagamento" *ngIf="metodoPagamento === 0">
+
+              <form [formGroup]="dadosCartaoCredito">
+
+                <h3>Dados do cartão</h3>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>credit_card</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Número do cartão" formControlName="numeroCartao">
+                    <mat-error *ngIf="checkErrorCartao('numeroCartao', 'required')">Número cartão é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>date_range</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Vencimento" formControlName="vencimento">
+                    <mat-error *ngIf="checkErrorCartao('vencimento', 'required')">Vencimento é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>vpn_key</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="CVV" formControlName="cvv">
+                    <mat-error *ngIf="checkErrorCartao('cvv', 'required')">CVV é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>assignment_ind</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Nome" formControlName="nomeCompletoCartao">
+                    <mat-error *ngIf="checkErrorCartao('nomeCompletoCartao', 'required')">Nome é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <h3>Endereço de cobrança</h3>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>fmd_good</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="CEP" formControlName="cepCartao">
+                    <mat-error *ngIf="checkErrorCartao('cepCartao', 'required')">CEP é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>maps_home_work</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Endereço" formControlName="enderecoCartao">
+                    <mat-error *ngIf="checkErrorCartao('enderecoCartao', 'required')">Endereço é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>business</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Bairro" formControlName="bairroCartao">
+                    <mat-error *ngIf="checkErrorCartao('bairroCartao', 'required')">Bairro é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>add_location</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Complemento" formControlName="complementoCartao">
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>map</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Cidade" formControlName="cidadeCartao">
+                    <mat-error *ngIf="checkErrorCartao('cidadeCartao', 'required')">Cidade é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>map</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Estado" formControlName="estadoCartao">
+                    <mat-error *ngIf="checkErrorCartao('estadoCartao', 'required')">Estado é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <button mat-raised-button color="primary" (click)="finalizarPagamento(1)"
+                  [disabled]="!dadosCartaoCredito.valid">
+                  <mat-icon matPrefix>check_circle</mat-icon>
+                  Finalizar Pagamento
+                </button>
+
+              </form>
+            </div>
+
+            <div class="content-pagamento" *ngIf="metodoPagamento === 1">
+              <h3 class="title">
+                <mat-icon matPrefix>qr_code_scanner</mat-icon> Aponte a câmera do seu celular
+              </h3>
+
+              <div class="qr-code-box">
+                <div class="left">
+                  <qrcode [qrdata]="'Your data'" [size]="400" [level]="'M'"></qrcode>
+
+                  <p>
+                    <mat-icon matPrefix>link</mat-icon> Pix copia e cola
+                  </p>
+                </div>
+
+                <div class="right">
+                  <h4>Valor do pix</h4>
+                  <p>R$30,00</p>
+                </div>
               </div>
+
+              <div class="passo-passo">
+                <h5>Como pagar</h5>
+                <ul>
+                  <li>
+                    <span>1</span>
+                    <p>Abra o aplicativo que você tem uma chave
+                      Pix cadastrada</p>
+                  </li>
+                  <li>
+                    <span>2</span>
+                    <p>Acesse a função Pix de aponte a câmera do
+                      seu celular para o QR Code</p>
+                  </li>
+                  <li>
+                    <span>3</span>
+                    <p>Se preferir, copie e cole o código do Pix no
+                      seu aplicativo ou banco online</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="content-pagamento" *ngIf="metodoPagamento === 2">
+              <form [formGroup]="dadosBoleto">
+                <h3>Dados de Endereço</h3>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>fmd_good</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="CEP" formControlName="cepBoleto">
+                    <mat-error *ngIf="checkErrorBoleto('cepBoleto', 'required')">CEP é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>maps_home_work</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Endereço" formControlName="enderecoBoleto">
+                    <mat-error *ngIf="checkErrorBoleto('enderecoBoleto', 'required')">Endereço é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>business</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Bairro" formControlName="bairroBoleto">
+                    <mat-error *ngIf="checkErrorBoleto('bairroBoleto', 'required')">Bairro é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>add_location</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Complemento" formControlName="complementoBoleto">
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>map</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Cidade" formControlName="cidadeBoleto">
+                    <mat-error *ngIf="checkErrorBoleto('cidadeBoleto', 'required')">Cidade é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-icon matPrefix>map</mat-icon>
+                  <mat-form-field class="example-full-width" appearance="legacy">
+                    <input matInput placeholder="Estado" formControlName="estadoBoleto">
+                    <mat-error *ngIf="checkErrorBoleto('estadoBoleto', 'required')">Estado é obrigatório</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <button mat-raised-button color="primary" [disabled]="!dadosBoleto.valid"
+                  (click)="finalizarPagamento(3)">
+                  <mat-icon matPrefix>check_circle</mat-icon>
+                  Finalizar Pagamento
+                </button>
+              </form>
+            </div>
           </mat-tab>
         </mat-tab-group>
+
+
+
+        <div class="conclusaoBoleto" *ngIf="metodoPagamento === 3">
+          <h3>
+            <mat-icon matPrefix>check_circle</mat-icon> Boleto gerado com sucesso
+          </h3>
+          <p>Obrigado por ajudar esse projeto e mudar vidas :)</p>
+          <ngx-barcode [bc-value]="'23791.2292860009.33030333000.046905788070000000220'" [bc-width]="1"
+            [bc-display-value]="true"></ngx-barcode>
+
+
+          <div class="group-buttons">
+            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active" >
+              <mat-icon matPrefix>public</mat-icon>
+              Ajude mais projetos
+            </button>
+  
+            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active" >
+              <mat-icon matPrefix>close</mat-icon>
+              Fechar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
