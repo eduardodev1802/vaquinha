@@ -5,6 +5,14 @@
     </div>
 
     <div class="pagamento-page__right">
+
+
+      <div class="pagamento-page__right--closeProject">
+        <span class="material-icons" [routerLink]="['/']" routerLinkActive="router-link-active" >
+          cancel
+        </span>
+      </div>
+
       <h2>{{ projetoData.title }}</h2>
 
       <div class="pagamento-page__right--groupLogin">
@@ -81,7 +89,7 @@
 
             </form>
           </mat-tab>
-          <mat-tab label="Dados Pagamento">
+          <mat-tab label="Dados Pagamento" [disabled]="!dadosPessoais.valid">
             <div class="tabs" *ngIf="metodoPagamento !== 3">
               <div class="tab" (click)="escolherMetodoPagamento(0)" [ngClass]="{active: metodoPagamento === 0}">Cartão
                 de
@@ -111,7 +119,7 @@
                 <div class="form-group">
                   <mat-icon matPrefix>date_range</mat-icon>
                   <mat-form-field class="example-full-width" appearance="legacy">
-                    <input matInput placeholder="Vencimento" formControlName="vencimento">
+                    <input matInput placeholder="Vencimento" formControlName="vencimento" mask="00/00">
                     <mat-error *ngIf="checkErrorCartao('vencimento', 'required')">Vencimento é obrigatório</mat-error>
                   </mat-form-field>
                 </div>
@@ -137,7 +145,7 @@
                 <div class="form-group">
                   <mat-icon matPrefix>fmd_good</mat-icon>
                   <mat-form-field class="example-full-width" appearance="legacy">
-                    <input matInput placeholder="CEP" formControlName="cepCartao">
+                    <input matInput placeholder="CEP" formControlName="cepCartao" mask="00.000-000">
                     <mat-error *ngIf="checkErrorCartao('cepCartao', 'required')">CEP é obrigatório</mat-error>
                   </mat-form-field>
                 </div>
@@ -196,17 +204,17 @@
               </h3>
 
               <div class="qr-code-box">
-                <div class="left">
-                  <qrcode [qrdata]="'Your data'" [size]="400" [level]="'M'"></qrcode>
+                <div class="left" *ngIf="resultadoPagamento">
+                  <qrcode [qrdata]="resultadoPagamento.pix.key" [size]="200" [level]="'M'"></qrcode>
 
-                  <p>
+                  <p (click)="copiarPIX()">
                     <mat-icon matPrefix>link</mat-icon> Pix copia e cola
                   </p>
                 </div>
 
                 <div class="right">
                   <h4>Valor do pix</h4>
-                  <p>R$30,00</p>
+                  <p>{{ dadosPessoais.value.valorContribuicao | currency:'BRL' }}</p>
                 </div>
               </div>
 
@@ -239,7 +247,7 @@
                 <div class="form-group">
                   <mat-icon matPrefix>fmd_good</mat-icon>
                   <mat-form-field class="example-full-width" appearance="legacy">
-                    <input matInput placeholder="CEP" formControlName="cepBoleto">
+                    <input matInput placeholder="CEP" formControlName="cepBoleto" mask="00.000-000">
                     <mat-error *ngIf="checkErrorBoleto('cepBoleto', 'required')">CEP é obrigatório</mat-error>
                   </mat-form-field>
                 </div>
@@ -305,12 +313,32 @@
 
 
           <div class="group-buttons">
-            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active" >
+            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active">
               <mat-icon matPrefix>public</mat-icon>
               Ajude mais projetos
             </button>
-  
-            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active" >
+
+            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active">
+              <mat-icon matPrefix>close</mat-icon>
+              Fechar
+            </button>
+          </div>
+        </div>
+
+        <div class="conclusaocartao" *ngIf="metodoPagamento === 4">
+          <h3>
+            <mat-icon matPrefix>warning</mat-icon> Pagamento em análise
+          </h3>
+          <p>Obrigado por ajudar esse projeto e mudar vidas :) Em breve você será notificado sobre a atualização do
+            status do seu pagamento.</p>
+
+          <div class="group-buttons">
+            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active">
+              <mat-icon matPrefix>public</mat-icon>
+              Ajude mais projetos
+            </button>
+
+            <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkActive="router-link-active">
               <mat-icon matPrefix>close</mat-icon>
               Fechar
             </button>

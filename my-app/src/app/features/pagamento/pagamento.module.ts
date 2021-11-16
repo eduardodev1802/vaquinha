@@ -13,6 +13,8 @@ import { LoginRoutingModule } from '../login/login-routing.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -24,9 +26,11 @@ import { NgxBarcodeModule } from 'ngx-barcode';
     FormsModule,
     QRCodeModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     NgxBarcodeModule,
     ReactiveFormsModule,
     PagamentoRoutingModule,
+    ClipboardModule,
     MatDialogModule, LoginRoutingModule, SharedModule, MatTabsModule, MatInputModule, MatIconModule, FormsModule, ReactiveFormsModule,
     MatButtonModule
   ]

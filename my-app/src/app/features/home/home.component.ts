@@ -238,6 +238,11 @@ export class HomeComponent implements OnInit {
 
   mostrarMaisProjetos() {
     this.paginaNumero = this.paginaNumero + 6;
+    this.query = null;
+    this.sort = null;
+    this.ufFiltro = null;
+    this.categoriaEscolhida = null;
+
     this.buscarMinhaPosicao(null);
   }
 
@@ -250,23 +255,39 @@ export class HomeComponent implements OnInit {
 
   setMapa(latitude: any, longitude: any, ufItem: any) {
 
-    if (ufItem === null) {
-      this.map.panTo({ lat: latitude, lng: longitude });
-    }
+    let marker: any;
 
     this.projetos.map((item: any, index: number) => {
 
-      if (ufItem) {
-        this.map.panTo({ lat: item.location.lat, lng: item.location.lon });
+      if (ufItem === null) {
+        this.map.panTo({ lat: latitude, lng: longitude });
+
+
+        marker = new google.maps.Marker({
+          position: { lat: item.location.lat, lng: item.location.lon },
+          map: this.map,
+          title: 'Got you!',
+          icon: '/assets/img/icon/icon-maps.png',
+          place: item.title
+        });
       }
 
-      let marker = new google.maps.Marker({
-        position: { lat: item.location.lat, lng: item.location.lon },
-        map: this.map,
-        title: 'Got you!',
-        icon: '/assets/img/icon/icon-maps.png',
-        place: item.title
-      });
+      if (ufItem) {
+
+        if (ufItem.uf === item.uf) {
+
+          this.map.panTo({ lat: item.location.lat, lng: item.location.lon });
+
+          marker = new google.maps.Marker({
+            position: { lat: item.location.lat, lng: item.location.lon },
+            map: this.map,
+            title: 'Got you!',
+            icon: '/assets/img/icon/icon-maps.png',
+            place: item.title
+          });
+        }
+          
+      }
 
 
       marker.setMap(this.map)

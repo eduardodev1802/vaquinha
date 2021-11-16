@@ -2,8 +2,10 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalLojaComponent } from 'src/app/shared/components/modal-loja/modal-loja.component';
 import { ProjetoService } from '../../domains/service/projeto.service';
 
 @Component({
@@ -25,7 +27,7 @@ export class DetalheProjetoComponent implements OnInit {
   urlCompartilhamento: any;
 
 
-  constructor(private router: Router,  private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { }
+  constructor(private dialog: MatDialog, private router: Router,  private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.urlCompartilhamento = window.location.href

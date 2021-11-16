@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalLojaComponent } from './components/modal-loja/modal-loja.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    ModalLojaComponent,
     ReactiveFormsModule,
+  ],
+  declarations: [
+    ModalLojaComponent
   ],
 })
 export class SharedModule {}

@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [MainLayoutComponent, NavComponent, FooterComponent],
@@ -22,6 +23,7 @@ import { FooterComponent } from './layout/footer/footer.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule
   ],
   exports: [MainLayoutComponent, NgxWizSSOModule],
 })

@@ -1,7 +1,7 @@
 export class Pagamento {
 
 
-    montarPayload(infoProjeto: any, autor: any, dadosUsuario: any, dadosPIX: any, dadosEndereco: any, fracoes: any, boleto: any) {
+    montarPayload(infoProjeto: any, autor: any, dadosUsuario: any, dadosPIX: any, dadosEndereco: any, fracoes: any, boleto: any, cartaoCredito: any) {
         let data = {
             "description": infoProjeto.description,
             "systemId": 1,
@@ -22,7 +22,7 @@ export class Pagamento {
                 "anonymous": dadosUsuario.anonimo ? dadosUsuario.anonimo : false,
                 "emailDoneReport": dadosUsuario.emailContribuicao ? dadosUsuario.emailContribuicao: false
             },
-            "creditCard": null,
+            "creditCard": cartaoCredito,
             "billet": boleto,
             "pix": dadosPIX,
             "address": dadosEndereco,
@@ -88,5 +88,48 @@ export class Pagamento {
         }
 
         return endereco;
+    }
+
+    montarCartaoCredito(dadosCartao: any, dadosPagamento: any) {
+        let cartao = {
+            "id": null,
+            "number": dadosCartao.numeroCartao.trim(),
+            "cvv": dadosCartao.cvv,
+            "expires": dadosCartao.vencimento,
+            "name": dadosCartao.nomeCompletoCartao,
+            "addressId": null,
+            "docNumber": dadosPagamento.cpf,
+            "docType": "CPF",
+            "flag": null
+        }
+
+        return cartao;
+    }
+
+
+    detectCardType(numberCredit: any): any {
+        var re: any = {
+            electron: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/,
+            maestro: /^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)\d+$/,
+            dankort: /^(5019)\d+$/,
+            interpayment: /^(636)\d+$/,
+            unionpay: /^(62|88)\d+$/,
+            visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+            mastercard: /^5[1-5][0-9]{14}$/,
+            amex: /^3[47][0-9]{13}$/,
+            diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+            discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+            jcb: /^(?:2131|1800|35\d{3})\d{11}$/
+        }
+    
+        let result = null;
+
+        for(var key in re) {
+            if(re[key].test(numberCredit)) {
+                result = key;
+            }
+        }
+
+        return result;
     }
 }

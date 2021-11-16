@@ -1,8 +1,11 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { ProjetoService } from '../projeto/domains/service/projeto.service';
+import { AlertComponent } from '../projeto/pages/detalhe-projeto/detalhe-projeto.component';
 import { Pagamento } from './domains/class/pagamento';
 import { PagamentoService } from './domains/services/pagamento.service';
 
@@ -22,9 +25,10 @@ export class PagamentoComponent implements OnInit {
   projetoData: any;
   autor: any;
   resultadoPagamento: any = null;
+  payload: any = null;
 
 
-  constructor(private authAngular: AngularFireAuth, private pagamentoService: PagamentoService, private route: ActivatedRoute, private projetoService: ProjetoService, private fb: FormBuilder) { }
+  constructor( private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private pagamentoService: PagamentoService, private route: ActivatedRoute, private projetoService: ProjetoService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.idProjeto = this.route.snapshot.paramMap.get('id');
@@ -79,6 +83,14 @@ export class PagamentoComponent implements OnInit {
     });
   }
 
+  copiarPIX() {
+    this.clipboard.copy(this.resultadoPagamento.pix.key);
+    let durationInSeconds = 2;
+
+    this._snackBar.openFromComponent(AlertComponent, {
+      duration: durationInSeconds * 1000,
+    });
+  }
 
   public checkError = (controlName: string, errorName: string) => {
     return this.dadosPessoais.controls[controlName].hasError(errorName);
@@ -113,6 +125,10 @@ export class PagamentoComponent implements OnInit {
 
   escolherMetodoPagamento(metodo: any) {
     this.metodoPagamento = metodo;
+
+    if(metodo == 1){
+      this.finalizarPagamento(2);
+    }
   }
 
   calculoPorcentagem(num: any, amount: any){
@@ -125,6 +141,7 @@ export class PagamentoComponent implements OnInit {
     let endereco = null;
     let boleto = null;
     let payload: any = null;
+    let cartaoCredito: any = null;
     let fracoes = [
       {
         "accountNumber": parseFloat(this.projetoData.paymentAccount),
@@ -132,6 +149,8 @@ export class PagamentoComponent implements OnInit {
         "description": "Valor para o projeto"
       }
     ]
+
+
 
     if(this.dadosPessoais.value.doacaoPlataforma == true) {
      let result = this.calculoPorcentagem(10, parseFloat(this.dadosPessoais.value.valorContribuicao));
@@ -144,6 +163,10 @@ export class PagamentoComponent implements OnInit {
     }
 
     if (tipoPagamento === 1) {
+      cartaoCredito = this._pagamento.montarCartaoCredito(this.dadosCartaoCredito.value, this.dadosPessoais.value);
+      cartaoCredito.flag = this._pagamento.detectCardType(this.dadosCartaoCredito.value.numeroCartao);
+
+      console.log('cartão', cartaoCredito);
       endereco = this._pagamento.montarEnderecoCartao(this.dadosCartaoCredito.value);
     }
 
@@ -156,12 +179,8 @@ export class PagamentoComponent implements OnInit {
       endereco = this._pagamento.montarEnderecoBoleto(this.dadosBoleto.value);
     }
 
-
-
-    payload = this._pagamento.montarPayload(this.projetoData, this.autor, this.dadosPessoais.value, pix, endereco, fracoes, boleto);
-
-    console.log('PAYLOAD', payload);
-
+    payload = this._pagamento.montarPayload(this.projetoData, this.autor, this.dadosPessoais.value, pix, endereco, fracoes, boleto, cartaoCredito);
+ 
     this.authAngular.user.subscribe((user: any) => {
       this.pagamentoService.fazerPagamento(payload, user.ya).subscribe((resp: any) => {
         this.resultadoPagamento = resp;
@@ -169,8 +188,13 @@ export class PagamentoComponent implements OnInit {
         if(tipoPagamento === 3) {
           this.metodoPagamento = 3
         }
-      })
 
+        if(tipoPagamento === 1) {
+          this.metodoPagamento = 4
+        }
+      }, (err) => {
+        window.alert(err.error);
+      })
     })
 
    

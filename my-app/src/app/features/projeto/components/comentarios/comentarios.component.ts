@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalLojaComponent } from 'src/app/shared/components/modal-loja/modal-loja.component';
 import { ProjetoService } from '../../domains/service/projeto.service';
 
 @Component({
@@ -13,7 +15,7 @@ export class ComentariosComponent implements OnInit {
   comentariosData: any = []
 
 
-  constructor(private projetoService: ProjetoService, private dbFirestore: AngularFirestore) { }
+  constructor(private dialog: MatDialog, private projetoService: ProjetoService, private dbFirestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.getUsuarioComentario()
@@ -30,8 +32,6 @@ export class ComentariosComponent implements OnInit {
     })
 
     this.getRespostasComentarios(this.comentarios);
-
-    console.log("THIS", this.comentarios);
   }
 
   getRespostasComentarios(comentarios: any) {
@@ -65,7 +65,10 @@ export class ComentariosComponent implements OnInit {
     })
   }
 
-
+  
+  abrirModalAppLoja() {
+    this.dialog.open(ModalLojaComponent);
+  }
 
   capturarImageProjeto(item: any) {
     this.dbFirestore.collection('files').doc(item.user.picUid).ref.get().then((doc) => {
