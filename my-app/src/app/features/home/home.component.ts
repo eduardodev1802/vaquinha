@@ -94,6 +94,8 @@ export class HomeComponent implements OnInit {
 
   buscarMinhaPosicao(filtroUF: any) {
 
+    console.log('Entrou em buscar minha posição')
+
     let coordenadas: any = {
       latitude: null,
       longitude: null
@@ -106,11 +108,18 @@ export class HomeComponent implements OnInit {
     } else {
       coordenadas.latitude = 15.7965037;
       coordenadas.longitude = 47.8859936;
+
+      console.log('Entrou no else')
+      this.buscarProjetos(coordenadas.latitude, coordenadas.longitude, filtroUF)
     }
   }
 
 
   buscarProjetos(lat: any, long: any, filtroUF: any) {
+
+
+    console.log('ENTROU NO BUSCAR PROJETOS');
+
     let objLatitude = {
       latitude: lat,
       longitude: long

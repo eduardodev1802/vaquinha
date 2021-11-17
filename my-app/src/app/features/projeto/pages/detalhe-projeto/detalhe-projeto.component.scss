@@ -102,6 +102,26 @@
                 left: 0;
                 margin-bottom: 0px;
                 width: 100%;
+                background-color: #342ead;
+                padding: 15px 20px;
+            }
+
+            ul {
+                display: none;
+                list-style: none;
+                margin-bottom: 8px;
+
+                @media (max-width: 992px) {
+                    display: flex;
+                    justify-content: space-around;
+                }
+
+                li {
+                    :hover {
+                        transform: translateY(-4px);
+                        transition: all 300ms ease;
+                    }
+                }
             }
 
             button {
@@ -113,6 +133,9 @@
                 width: 100%;
 
                 @media (max-width: 992px) {
+                    background-color: #fff;
+                    border: 1px solid #342ead;
+                    color: #342ead;
                     border-radius: 0px;
                 }
 
