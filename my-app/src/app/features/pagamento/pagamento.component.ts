@@ -165,8 +165,6 @@ export class PagamentoComponent implements OnInit {
     if (tipoPagamento === 1) {
       cartaoCredito = this._pagamento.montarCartaoCredito(this.dadosCartaoCredito.value, this.dadosPessoais.value);
       cartaoCredito.flag = this._pagamento.detectCardType(this.dadosCartaoCredito.value.numeroCartao);
-
-      console.log('cartão', cartaoCredito);
       endereco = this._pagamento.montarEnderecoCartao(this.dadosCartaoCredito.value);
     }
 

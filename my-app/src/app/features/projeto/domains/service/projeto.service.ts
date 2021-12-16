@@ -101,6 +101,15 @@ export class ProjetoService {
       }));
   }
 
+  getCategorias() {
+    return this.http.get<any>(`${environment.apiUrl}project/subjects`, {
+      headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
 }
 
 

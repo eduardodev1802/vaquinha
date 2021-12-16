@@ -10,38 +10,39 @@
             </div>
 
             <div *ngIf="projetoData.result[0].mime === 1" class="video-youtube">
-                <iframe width="100%" height="100%" [src]="montarIframeYoutube(projetoData.result[0].endereco) | safedois"></iframe>
+                <iframe width="100%" height="100%"
+                    [src]="montarIframeYoutube(projetoData.result[0].endereco) | safedois"></iframe>
             </div>
         </div>
 
         <div class="detalhe__right">
             <div class="detalhe__right--arrecadacao">
                 <div class="left">
-                    <label>Arrecadado</label>
+                    <label>Arrecadado <span>{{ buscarCategoria(projetoData.result[0].subjectId) }}</span></label>
                     <p *ngIf="arrecadado">{{ arrecadado | currency:'BRL' }}</p>
                     <p *ngIf="!arrecadado">R$ 0</p>
                 </div>
 
                 <div class="right">
-                    <circle-progress [percent]="porcentagem" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
-                        [outerStrokeColor]="'#FFBD00'" [innerStrokeColor]="'#EEEEFF'" [animation]="true"
-                        [animationDuration]="300">
+                    <circle-progress [percent]="porcentagem" [radius]="100" [outerStrokeWidth]="16"
+                        [innerStrokeWidth]="8" [outerStrokeColor]="'#FFBD00'" [innerStrokeColor]="'#EEEEFF'"
+                        [animation]="true" [animationDuration]="300">
                     </circle-progress>
                 </div>
             </div>
 
             <div class="detalhe__right--metas">
-                <div>
+                <div (click)="escolherTabDetalhe(3)" [ngxScrollTo]="'#content'">
                     <label>Meta</label>
                     <p>{{ projetoData.result[0].goal | currency:'BRL' }}</p>
                 </div>
 
-                <div>
+                <div (click)="escolherTabDetalhe(3)" [ngxScrollTo]="'#content'">
                     <label>Ajudas</label>
                     <p>{{ listaContribuicao.length }}</p>
                 </div>
 
-                <div>
+                <div (click)="escolherTabDetalhe(5)" [ngxScrollTo]="'#content'">
                     <label>Comentários</label>
                     <p>{{ ListaComentarios.length }}</p>
                 </div>
@@ -72,17 +73,34 @@
                             <img src="/assets/img/icon/instagram-shared.svg" alt="" srcset="">
                         </a>
                     </li>
+
+                    <li (click)="compartilharInstagram()">
+                        <a>
+                            <mat-icon aria-hidden="false" aria-label="Example home icon">share</mat-icon>
+                        </a>
+                    </li>
                 </ul>
-                
-                <button mat-raised-button color="primary" (click)="irParaPagamento()" *ngIf="projetoData.result[0].status === 'A'">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up_alt</mat-icon>
-                    Quero ajudar uma vida
+
+                <div class="group-buttons">
+                    <button mat-raised-button color="primary" (click)="irParaPagamento()"
+                    *ngIf="projetoData.result[0].status === 'A'">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">attach_money</mat-icon>
+                    Contribuir
                 </button>
 
-                <button class="encerrado" mat-raised-button color="secondary" [disabled]="projetoData.result[0].status === 'F'" *ngIf="projetoData.result[0].status === 'F'">
+                <button class="encerrado" (click)="escolherTabDetalhe(2)" mat-raised-button color="secondary"
+                    *ngIf="projetoData.result[0].status === 'F'">
                     <mat-icon aria-hidden="false" aria-label="Example home icon">highlight_off</mat-icon>
-                    Projeto Encerrado
+                    Encerrado
                 </button>
+
+                <button class="local" mat-raised-button color="secondary" (click)="irParaLocalizacao()">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">place</mat-icon>
+                    Ir no local
+                </button>
+
+                </div>
+
             </div>
 
             <div class="detalhe__right--autor">
@@ -91,10 +109,10 @@
                     <h3>{{ projetoData.result[0].owner.nome }}</h3>
                 </div>
 
-                <!-- <a href="#">
+                <a [ngxScrollTo]="'#content'" (click)="escolherTabDetalhe(4)">
                     <mat-icon aria-hidden="false" aria-label="Example home icon">public</mat-icon>
                     ver projetos
-                </a> -->
+                </a>
             </div>
 
             <div class="detalhe__right--socialMedia">
@@ -123,6 +141,12 @@
                             <img src="/assets/img/icon/instagram-shared.svg" alt="" srcset="">
                         </a>
                     </li>
+
+                    <li (click)="compartilharInstagram()">
+                        <a>
+                            <mat-icon aria-hidden="false" aria-label="Example home icon">share</mat-icon>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -132,19 +156,20 @@
         <h2>{{ projetoData.result[0].title }}</h2>
     </div>
 
-    <div class="content">
+    <div class="content" id="content">
         <div class="tabs">
             <div class="tab" (click)="escolherTabDetalhe(1)" [ngClass]="{active: tabDetalhe === 1}">Descrição</div>
+            <div class="tab" (click)="escolherTabDetalhe(3)" [ngClass]="{active: tabDetalhe === 3}">Contribuições</div>
+            <div class="tab" (click)="escolherTabDetalhe(5)" [ngClass]="{active: tabDetalhe === 5}">Comentários</div>
+            <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico</div>
             <div class="tab" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Prestação de contas
             </div>
-            <div class="tab" (click)="escolherTabDetalhe(3)" [ngClass]="{active: tabDetalhe === 3}">Contribuições</div>
-            <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico</div>
-            <div class="tab" (click)="escolherTabDetalhe(5)" [ngClass]="{active: tabDetalhe === 5}">Comentários</div>
         </div>
 
         <div class="conteudo">
             <app-descricao *ngIf="tabDetalhe === 1" [descricao]="projetoData.result[0].description"></app-descricao>
-            <app-prestacao-contas *ngIf="tabDetalhe === 2" [listaPrestacaoData]="listaPrestacaoContas"></app-prestacao-contas>
+            <app-prestacao-contas *ngIf="tabDetalhe === 2" [listaPrestacaoData]="listaPrestacaoContas">
+            </app-prestacao-contas>
             <app-contribuicoes *ngIf="tabDetalhe === 3" [contribuicoes]="listaContribuicao"></app-contribuicoes>
             <app-historico *ngIf="tabDetalhe === 4" [historico]="listaProjetosUsuario"></app-historico>
             <app-comentarios *ngIf="tabDetalhe === 5" [comentarios]="ListaComentarios"></app-comentarios>

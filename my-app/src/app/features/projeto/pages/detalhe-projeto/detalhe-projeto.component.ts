@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { ModalLojaComponent } from 'src/app/shared/components/modal-loja/modal-loja.component';
 import { ProjetoService } from '../../domains/service/projeto.service';
 
@@ -25,13 +26,27 @@ export class DetalheProjetoComponent implements OnInit {
   arrecadado: any;
   porcentagem: any;
   urlCompartilhamento: any;
+  categorias: any;
 
 
-  constructor(private dialog: MatDialog, private router: Router,  private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { }
+  constructor(private scrollToService: ScrollToService, private dialog: MatDialog, private router: Router,  private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { 
+    const navigation: any = this.router.getCurrentNavigation();
+    const state = navigation.extras.state;
+
+    if(parseInt(state) === 1) {
+      this.escolherTabDetalhe(3);
+    }
+
+    if(parseInt(state) === 2) {
+      this.escolherTabDetalhe(5);
+    }
+  }
 
   ngOnInit(): void {
     this.urlCompartilhamento = window.location.href
     this.idProjeto = this.route.snapshot.paramMap.get('id');
+
+ 
 
     this.getDetalheProjeto(this.idProjeto);
   }
@@ -47,8 +62,7 @@ export class DetalheProjetoComponent implements OnInit {
       this.getComentarios(this.idProjeto);
       this.getContribuicoes(this.idProjeto)
       this.getTimeline(this.projetoData);
-
-      console.log('PROJETO DATA', this.projetoData);
+      this.getCategorias();
     })
   }
 
@@ -134,12 +148,34 @@ export class DetalheProjetoComponent implements OnInit {
 
   escolherTabDetalhe(numeroTab: number) {
     this.tabDetalhe = numeroTab;
+
+    this.scrollToService.scrollTo({
+      target: 'content',
+      duration: 650,
+      easing: 'easeOutElastic',
+    });
   }
 
   getComentarios(id: any) {
     this.projetoService.getComentarios(id).subscribe((resp) => {
       this.ListaComentarios = resp;
     })
+  }
+
+  getCategorias() {
+    this.projetoService.getCategorias().subscribe((resp) => {
+      this.categorias = resp;
+    })
+  }
+
+  buscarCategoria(id: number) {
+    let categoria: any = null;
+    
+    this.categorias.map((item: any) => {
+      if(item.id === id) categoria = item;
+    })
+
+    return categoria.title;
   }
 
   getContribuicoes(id: any) {
@@ -149,6 +185,10 @@ export class DetalheProjetoComponent implements OnInit {
       this.arrecadado = this.somarContribuicoes(this.listaContribuicao);
       this.porcentagem = this.calcularRegraDeTres(this.arrecadado, this.projetoData.result[0].goal);
     })
+  }
+
+  irParaLocalizacao() {
+    window.open(`https://www.google.com.br/maps/search/${this.projetoData.result[0].location.lat},${this.projetoData.result[0].location.lon}`, '_blank');
   }
 
   somarContribuicoes(data: any) {
@@ -198,6 +238,7 @@ export class DetalheProjetoComponent implements OnInit {
 
     this._snackBar.openFromComponent(AlertComponent, {
       duration: durationInSeconds * 1000,
+      verticalPosition: "top"
     });
    
   }

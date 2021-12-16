@@ -1,9 +1,10 @@
 <div class="card" (click)="irParaProjeto()">
     <div class="card__header">
         <div class="card__header--imgProjeto">
-            <img [src]="projeto.thumb" alt="" srcset="" *ngIf="projeto.mime === 2">
+            <img [src]="projeto.thumb" alt="" srcset="" *ngIf="projeto.thumb">
+            <img src="/assets/img/bg/image-not-found.jpg" alt="" srcset="" *ngIf="!projeto.thumb">
 
-            <div *ngIf="projeto.mime === 3">
+            <!-- <div *ngIf="projeto.mime === 3">
                 <video width="100%" height="100%" [src]="projeto.endereco" controls>
                     Your browser does not support HTML5 video.
                 </video>
@@ -11,12 +12,9 @@
 
             <div *ngIf="projeto.mime === 1">
                 <iframe width="100%" [src]="montarIframeYoutube(projeto.endereco) | safe"></iframe>
-            </div>
+            </div> -->
 
         </div>
-        <span class="card__header--categoria">
-           {{ procurarCategoria(projeto.subjectId) }}
-        </span>
     </div>
 
     <div class="card__body">
@@ -36,8 +34,17 @@
 
 
         <div class="card__body--localizacao">
-            <img src="/assets/img/icon/location.svg" alt="">
-            <p>{{ projeto.city }}, {{ projeto.uf }} - {{ arredondarKM(projeto.distanceKm) }} Km</p>
+            <div class="left">
+                <img src="/assets/img/icon/location.svg" alt="">
+                <p>{{ projeto.city }}, {{ projeto.uf }} - {{ arredondarKM(projeto.distanceKm) }} Km</p>
+            </div>
+
+            <div class="right">
+                <span class="material-icons">
+                    schedule
+                </span>
+                <p>{{ projeto.publishDateTime }}</p>
+            </div>
         </div>
 
         <div class="card__body--meta">
@@ -56,19 +63,19 @@
 
         <div class="card__body--socialInfo">
             <div class="left">
-                <div>
+                <div (click)="irParaProjetoExpand(1)">
                     <span class="material-icons">
                         groups
                     </span>
                     <p>{{ projeto.peopleAmount }}</p>
                 </div>
-                <div>
+                <div (click)="irParaProjetoExpand(2)">
                     <span class="material-icons">
                         question_answer
                     </span>
                     <p>{{ projeto.comentarios }}</p>
                 </div>
-                <div>
+                <div (click)="irParaProjetoExpand(2)">
                     <span class="material-icons">
                         thumb_up_off_alt
                     </span>
@@ -77,10 +84,9 @@
             </div>
 
             <div class="right">
-                <span class="material-icons">
-                    schedule
+                <span>
+                    {{ procurarCategoria(projeto.subjectId) }}
                 </span>
-                <p>{{ projeto.publishDateTime }}</p>
             </div>
         </div>
     </div>

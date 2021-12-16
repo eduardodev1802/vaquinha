@@ -12,9 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './layout/footer/footer.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MenuComponent } from './layout/menu/menu.component';
+
 
 @NgModule({
-  declarations: [MainLayoutComponent, NavComponent, FooterComponent],
+  declarations: [MainLayoutComponent, NavComponent, FooterComponent, MenuComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -23,7 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   exports: [MainLayoutComponent, NgxWizSSOModule],
 })

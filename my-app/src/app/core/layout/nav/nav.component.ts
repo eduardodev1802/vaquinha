@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ModalLojaComponent } from 'src/app/shared/components/modal-loja/modal-loja.component';
+import { ModalSobreNosComponent } from 'src/app/shared/components/modal-sobre-nos/modal-sobre-nos.component';
+import { MenuComponent } from '../menu/menu.component';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -32,11 +34,19 @@ export class NavComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(MenuComponent, {restoreFocus: false});
+  }
+
   logOut(): void {
     this.router.navigate(['/login']);
   }
 
   abrirModalAppLoja() {
     this.dialog.open(ModalLojaComponent);
+  }
+
+  abrirSobreNos() {
+    this.dialog.open(ModalSobreNosComponent);
   }
 }

@@ -10,9 +10,60 @@
         <p>Baixe o nosso App</p>
       </div>
 
-      <div class="avatar">
-          <img *ngIf="logoUrl" [src]="logoUrl" alt="">
+      <div class="download-sobre-nos" (click)="abrirSobreNos()">
+        <p>Sobre Nós</p>
+      </div>
+
+      <div class="avatar" mat-button [matMenuTriggerFor]="menu" #menuTrigger>
+        <img *ngIf="logoUrl" [src]="logoUrl" alt="">
       </div>
     </div>
   </mat-toolbar>
 </div>
+
+<mat-menu #menu="matMenu">
+
+  <ul class="list-menu">
+    <li [routerLink]="['/']" routerLinkActive="router-link-active" >
+      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+      <p>Inicio</p>
+      <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
+    </li>
+
+    <li (click)="abrirModalAppLoja()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">sensor_door</mat-icon>
+      <p>Meus projetos</p>
+      <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
+    </li>
+
+    <li (click)="abrirModalAppLoja()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">public</mat-icon>
+      <p>Minhas reuniões</p>
+      <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
+    </li>
+
+    <li (click)="abrirModalAppLoja()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">fact_check</mat-icon>
+      <p>Minhas <br> participações</p>
+      <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
+    </li>
+
+    <li (click)="abrirModalAppLoja()"> 
+      <mat-icon aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
+      <p>Favoritos</p>
+      <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
+    </li>
+
+    <li (click)="abrirModalAppLoja()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
+      <p>Notificações</p>
+      <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
+    </li>
+
+    <li (click)="abrirModalAppLoja()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">help</mat-icon>
+      <p>Sobre</p>
+      <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
+    </li>
+  </ul>
+</mat-menu>

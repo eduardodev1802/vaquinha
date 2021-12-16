@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalLojaComponent } from './components/modal-loja/modal-loja.component';
+import { ModalSobreNosComponent } from './components/modal-sobre-nos/modal-sobre-nos.component';
 
 @NgModule({
   imports: [
@@ -27,10 +28,12 @@ import { ModalLojaComponent } from './components/modal-loja/modal-loja.component
     MatInputModule,
     MatButtonModule,
     ModalLojaComponent,
+    ModalSobreNosComponent,
     ReactiveFormsModule,
   ],
   declarations: [
-    ModalLojaComponent
+    ModalLojaComponent,
+    ModalSobreNosComponent
   ],
 })
 export class SharedModule {}

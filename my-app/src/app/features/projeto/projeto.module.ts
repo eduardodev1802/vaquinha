@@ -18,6 +18,7 @@ import { ComentariosComponent } from './components/comentarios/comentarios.compo
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { SafeDoisPipe } from 'src/app/pipes/safe-2.pipe';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatExpansionModule,
     NgCircleProgressModule,
     ClipboardModule,
+    ScrollToModule.forRoot(),
     NgCircleProgressModule.forRoot({
       radius: 100,
       outerStrokeWidth: 16,

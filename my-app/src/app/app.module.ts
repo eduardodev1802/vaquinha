@@ -20,6 +20,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PrivacyComponent } from './features/privacy/privacy.component';
+import { TermsComponent } from './features/terms/terms.component';
 
 
 const config = {
@@ -37,7 +39,7 @@ registerLocaleData(localePt, 'pt-BR');
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PrivacyComponent, TermsComponent],
   imports: [
     CoreModule,
     SharedModule,

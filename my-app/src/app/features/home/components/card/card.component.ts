@@ -1,6 +1,6 @@
 import { trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { HomeService } from '../../domains/services/projeto/home.service';
 
 
@@ -50,6 +50,13 @@ export class CardComponent implements OnInit {
 
   irParaProjeto() {
     this.router.navigate([`/projeto/detalhe/${this.projeto.id}`]);
+  }
+
+  irParaProjetoExpand(ancora: any) {
+
+    const navigationExtras: NavigationExtras = {state: ancora};
+    
+    this.router.navigate([`/projeto/detalhe/${this.projeto.id}`], navigationExtras);
   }
 
   procurarCategoria(id: number) {

@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
     { value: 'SE', label: 'Sergipe' },
     { value: 'TO', label: 'Tocantins' },
   ]
+  estadosPosicoes: any = [];
   // MAP
   @ViewChild('gmap') gmapElement: any;
 
@@ -94,8 +95,6 @@ export class HomeComponent implements OnInit {
 
   buscarMinhaPosicao(filtroUF: any) {
 
-    console.log('Entrou em buscar minha posição')
-
     let coordenadas: any = {
       latitude: null,
       longitude: null
@@ -109,16 +108,12 @@ export class HomeComponent implements OnInit {
       coordenadas.latitude = 15.7965037;
       coordenadas.longitude = 47.8859936;
 
-      console.log('Entrou no else')
       this.buscarProjetos(coordenadas.latitude, coordenadas.longitude, filtroUF)
     }
   }
 
 
   buscarProjetos(lat: any, long: any, filtroUF: any) {
-
-
-    console.log('ENTROU NO BUSCAR PROJETOS');
 
     let objLatitude = {
       latitude: lat,
@@ -172,7 +167,6 @@ export class HomeComponent implements OnInit {
         if (doc.exists) {
           let resp: any = null;
           resp = doc.data();
-
           item.endereco = resp.address;
           item.thumb = resp.thumbAddress;
           item.mime = this.setMimeTipo(resp.mine)
@@ -189,7 +183,34 @@ export class HomeComponent implements OnInit {
   getEstados() {
     this.homeService.getEstados().subscribe((item) => {
       this.estados = item;
+
+      this.estados = this.estados.sort((a: any, b: any) => b[1] - a[1]);
+      this.getEstadosPosicao(this.estados);
     })
+  }
+
+  getEstadosPosicao(estados: any) {
+    this.homeService.getEstadosPosicoes().subscribe((item) => {
+      this.estadosPosicoes = item;
+
+      estados.map((value: any) => {
+        console.log(value, 'value')
+      })
+    })
+  }
+
+
+  zeraBuscaProjeto() {
+
+    this.query = null;
+
+    this.pesquisarProjeto();
+  }
+
+  verificarCampoPesquisa() {
+    if(this.query === '' || this.query === null) return false;
+
+    return true
   }
 
   pesquisarProjeto() {
@@ -225,6 +246,7 @@ export class HomeComponent implements OnInit {
   }
 
   escolherFiltroCategoria(item: any) {
+    this.paginaNumero = 0
     this.query = null;
     this.ufFiltro = null;
     this.sort = item.filter;
@@ -234,6 +256,8 @@ export class HomeComponent implements OnInit {
 
   mudarCategoriaProjeto(id: any) {
     this.categoriaEscolhida = id;
+
+    this.escolherCategoriaProjeto();
   }
 
   escolherCategoriaProjeto() {
@@ -248,7 +272,6 @@ export class HomeComponent implements OnInit {
   mostrarMaisProjetos() {
     this.paginaNumero = this.paginaNumero + 6;
     this.query = null;
-    this.sort = null;
     this.ufFiltro = null;
     this.categoriaEscolhida = null;
 
@@ -269,7 +292,7 @@ export class HomeComponent implements OnInit {
     this.projetos.map((item: any, index: number) => {
 
       if (ufItem === null) {
-        this.map.panTo({ lat: latitude, lng: longitude });
+        this.map.panTo({ lat: item.location.lat, lng: item.location.lon });
 
 
         marker = new google.maps.Marker({
@@ -277,7 +300,8 @@ export class HomeComponent implements OnInit {
           map: this.map,
           title: 'Got you!',
           icon: '/assets/img/icon/icon-maps.png',
-          place: item.title
+          place: item.title,
+          
         });
       }
 
@@ -298,7 +322,6 @@ export class HomeComponent implements OnInit {
           
       }
 
-
       marker.setMap(this.map)
     })
   }
@@ -314,12 +337,29 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  buscarCategorias(valor: any) {
+    let result: any = null;
+
+    this.categorias.map((item: any) => {
+      if(item.id === valor) {
+        result = item;
+      }
+    })
+
+    return result.title
+  }
+
   filtrarPorUF(item: any) {
+    this.estadosPosicoes.map((resp: any) => {
+      if(item[0] === resp.uf) {
+        this.ufFiltro = resp;
+      }
+    })
+
     this.query = null;
     this.sort = null;
     this.categoriaEscolhida = null
-    this.ufFiltro = item.uf;
 
-    this.buscarMinhaPosicao(item);
+    this.buscarMinhaPosicao(this.ufFiltro);
   }
 }

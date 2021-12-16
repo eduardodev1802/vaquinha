@@ -50,6 +50,15 @@ export class HomeService {
   }
 
   getEstados() {
+    return this.http.get<any>(`${environment.apiUrl}project/count-by-uf`, {
+      headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
+  getEstadosPosicoes() {
     return this.http.get<any>(`${environment.apiUrl}address/states`, {
       headers: this.httpOptions.headers
     })

@@ -24,25 +24,6 @@
                 border-radius: 4px 4px 0px 0px;
             }
         }
-
-        span {
-            position: absolute;
-            bottom: 5px;
-            z-index: 999;
-            font-size: 12px;
-            background-color: #342ead;
-            color: #fff;
-            padding: 6px 6px;
-            border-radius: 11px;
-            min-width: 70px;
-            text-align: center;
-            right: 7px;
-
-            img {
-                height: 35px;
-                width: 35px;
-            }
-        }
     }
 
     &__body {
@@ -82,17 +63,41 @@
         &--localizacao {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 6px;
 
-            img {
-                margin-right: 4px;
+            .left {
+                display: flex;
+                align-items: center;
+
+                img {
+                    margin-right: 4px;
+                }
+    
+                p {
+                    color: #342ead;
+                    font-size: 14px;
+                    margin-top: 5px;
+                }
             }
 
-            p {
-                color: #342ead;
-                font-size: 14px;
-                margin-top: 5px;
+            .right {
+                display: flex;
+                align-items: center;
+                padding-top: 3px;
+
+                span {
+                    color: #d5dae0;
+                    margin-right: 6px;
+                    font-size: 19px;
+                }
+
+                p {
+                    color: #2e4765;
+                    font-size: 13px;
+                }
             }
+
         }
 
         &--meta {
@@ -180,18 +185,25 @@
                 align-items: center;
 
                 @media (max-width: 768px) {
-                    display: none;
+                    display: block;
                 }
 
                 span {
-                    color: #d5dae0;
-                    margin-right: 6px;
-                    font-size: 19px;
-                }
-
-                p {
-                    color: #2e4765;
-                    font-size: 13px;
+                    bottom: 5px;
+                    z-index: 999;
+                    font-size: 12px;
+                    background-color: #342ead;
+                    color: #fff;
+                    padding: 6px 6px;
+                    border-radius: 11px;
+                    min-width: 70px;
+                    text-align: center;
+                    right: 7px;
+        
+                    img {
+                        height: 35px;
+                        width: 35px;
+                    }
                 }
             }
         }
