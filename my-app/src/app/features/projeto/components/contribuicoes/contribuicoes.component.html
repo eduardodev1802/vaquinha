@@ -5,9 +5,13 @@
         <div class="contribuicoes-page__list--card" *ngFor="let item of contribuicoes">
             <div class="header">
                 <div class="left">
-                    <div class="avatar"></div>
+                    <div class="avatar">
+                        <img *ngIf="item.endereco" [src]="item.endereco" alt="" srcset="">
+                        <img *ngIf="!item.endereco" src="/assets/img/avatar.png" alt="" srcset="">
+                    </div>
                     <div class="info">
                         <h4 *ngIf="item.anonymous">Anônimo</h4>
+                        <h4 *ngIf="!item.anonymous">{{ item.user.nome }}</h4>
                         <p>{{ item.createDate }}</p>
                     </div>
                 </div>

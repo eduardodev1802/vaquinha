@@ -309,7 +309,9 @@
           </h3>
           <p>Obrigado por ajudar esse projeto e mudar vidas :)</p>
           <ngx-barcode [bc-value]="resultadoPagamento.billet.number" [bc-width]="1"
-            [bc-display-value]="true"></ngx-barcode>
+            [bc-display-value]="false"></ngx-barcode>
+
+          <p class="copiar-cod" (click)="copiarBoleto()">Copiar código de barras <mat-icon matPrefix>content_copy</mat-icon> </p>
 
 
           <div class="group-buttons">

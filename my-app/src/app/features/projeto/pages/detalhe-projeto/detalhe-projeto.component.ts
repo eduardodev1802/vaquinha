@@ -63,7 +63,14 @@ export class DetalheProjetoComponent implements OnInit {
       this.getContribuicoes(this.idProjeto)
       this.getTimeline(this.projetoData);
       this.getCategorias();
+      this.verificarProjetoFinalizado();
     })
+  }
+
+  verificarProjetoFinalizado() {
+    if(this.projetoData.result[0].status === 'F') {
+      this.escolherTabDetalhe(2);
+    }
   }
 
   getPrestadorContas(id: any) {

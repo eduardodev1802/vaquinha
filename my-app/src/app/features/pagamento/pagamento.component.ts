@@ -92,6 +92,16 @@ export class PagamentoComponent implements OnInit {
     });
   }
 
+
+  copiarBoleto() {
+    this.clipboard.copy(this.resultadoPagamento.billet.number);
+    let durationInSeconds = 2;
+
+    this._snackBar.openFromComponent(AlertComponent, {
+      duration: durationInSeconds * 1000,
+    });
+  }
+
   public checkError = (controlName: string, errorName: string) => {
     return this.dadosPessoais.controls[controlName].hasError(errorName);
   }

@@ -200,7 +200,7 @@
 }
 
 .mat-checkbox {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .content-pagamento {
@@ -376,14 +376,31 @@
   }
 
   p {
+    display: flex;
+    align-items: center;
     font-weight: normal;
     font-size: 12px;
     margin-bottom: 30px;
   }
 
+  .copiar-cod {
+    cursor: pointer;
+    text-align: center;
+    justify-content: center;
+    font-size: 16px;
+
+    mat-icon {
+      margin-left: 8px;
+    }
+  }
+
   .group-buttons {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 992px) {
+      flex-direction: column;
+    }
 
     button {
       background-color: #342ead;
@@ -391,6 +408,11 @@
       align-items: center;
       justify-content: center;
       width: 48%;
+
+      @media (max-width: 992px) {
+        width: 100%;
+        margin-bottom: 20px;
+      }
     }
   }
 }

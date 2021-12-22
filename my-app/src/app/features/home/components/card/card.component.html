@@ -1,5 +1,5 @@
-<div class="card" (click)="irParaProjeto()">
-    <div class="card__header">
+<div class="card">
+    <div class="card__header" (click)="irParaProjeto()">
         <div class="card__header--imgProjeto">
             <img [src]="projeto.thumb" alt="" srcset="" *ngIf="projeto.thumb">
             <img src="/assets/img/bg/image-not-found.jpg" alt="" srcset="" *ngIf="!projeto.thumb">
@@ -19,7 +19,7 @@
 
     <div class="card__body">
 
-        <div class="card__body--title">
+        <div class="card__body--title" (click)="irParaProjeto()">
             <div class="left">
                 <h2>{{ projeto.title }}</h2>
                 <p>{{ projeto.description | truncate:[35, '...'] }} </p>
@@ -33,7 +33,7 @@
         </div>
 
 
-        <div class="card__body--localizacao">
+        <div class="card__body--localizacao" (click)="irParaProjeto()">
             <div class="left">
                 <img src="/assets/img/icon/location.svg" alt="">
                 <p>{{ projeto.city }}, {{ projeto.uf }} - {{ arredondarKM(projeto.distanceKm) }} Km</p>
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="card__body--meta">
+        <div class="card__body--meta" (click)="irParaProjeto()">
             <div class="left">
                 <p>{{ projeto.valorDoado | currency:'BRL' }}<span>arrecadados</span></p>
             </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="card__body--porcentagem">
+        <div class="card__body--porcentagem" (click)="irParaProjeto()">
             <div class="qtd-percent" [style.width.%]="calcularRegraDeTres(projeto.valorDoado, projeto.goal)"></div>
         </div>
 
@@ -75,7 +75,7 @@
                     </span>
                     <p>{{ projeto.comentarios }}</p>
                 </div>
-                <div (click)="irParaProjetoExpand(2)">
+                <div (click)="abrirModalAppLoja()">
                     <span class="material-icons">
                         thumb_up_off_alt
                     </span>

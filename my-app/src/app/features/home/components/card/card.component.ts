@@ -1,6 +1,8 @@
 import { trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
+import { ModalLojaComponent } from 'src/app/shared/components/modal-loja/modal-loja.component';
 import { HomeService } from '../../domains/services/projeto/home.service';
 
 
@@ -19,7 +21,7 @@ export class CardComponent implements OnInit {
   @Input() projeto: any;
   categorias: any;
 
-  constructor(private router: Router, private homeService: HomeService) { }
+  constructor(private router: Router, private homeService: HomeService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
    
@@ -65,5 +67,11 @@ export class CardComponent implements OnInit {
 
     let categoria: any = listaCategorias.find(categoria => categoria.id === id);
     return categoria.title;
+  }
+
+  abrirModalAppLoja() {
+    this.dialog.open(ModalLojaComponent);
+
+    return false;
   }
 }
