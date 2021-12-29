@@ -29,7 +29,7 @@
           </span>
 
 
-          <input type="text" (input)="verificarInputPesquisa()" [(ngModel)]="query"
+          <input type="text" (input)="verificarInputPesquisa()" (keyup.enter)="pesquisarProjeto()" [(ngModel)]="query"
             placeholder="Pesquise por Titulo, Descrição ou Responsável">
         </div>
 

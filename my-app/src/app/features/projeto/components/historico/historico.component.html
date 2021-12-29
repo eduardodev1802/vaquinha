@@ -2,8 +2,7 @@
     <div class="listaHistorico" *ngFor="let item of historico.result">
         <div class="card-data">
             <span [ngClass]="{ativo: item.status === 'A', inativo: item.status === 'F'}"></span>
-            <h3>Data</h3>
-            <p>{{ item.finishDateTime }}</p>
+            <p>{{ formatarData(item.finishDateTime) }}</p>
         </div>
 
         <div class="card-openClose">
@@ -16,25 +15,32 @@
             </span>
         </div>
 
-        <div class="card" (click)="irParaProjeto(item)">
+        <div class="card">
             <div class="header">
-                <img [src]="item.thumb" alt="" srcset="">
-
-                <!-- <div *ngIf="item.mime === 3">
-                    <video width="100%" height="100%" [src]="item.endereco" controls>
-                        Your browser does not support HTML5 video.
-                    </video>
-                </div>
-
-                <div *ngIf="item.mime === 1">
-                    <iframe width="100%" [src]="montarIframeYoutube(item.endereco) | safedois"></iframe>
-                </div> -->
+                <img [src]="item.thumb" alt="" srcset="" (click)="toggleModal(item)">
             </div>
 
             <div class="body">
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.description }}</p>
+                <h3 (click)="irParaProjeto(item)">{{ item.title }}</h3>
+                <p (click)="irParaProjeto(item)">{{ item.description }}</p>
+                <div class="info-gerais">
+                    <div class="left">
+                        <span>
+                            {{ procurarCategoria(item.subjectId) }}
+                        </span>
+                    </div>
+
+                    <div class="right" (click)="abrirModalAvaliacao(item)">
+                        <span class="material-icons">
+                            star
+                        </span>
+                        <p>{{ item.avaliacoes.media }} ({{item.avaliacoes.qtd}})</p>
+                    </div>
+                </div>
             </div>
+
+            <app-modal-expand [dataProjeto]="dataModalItem" *ngIf="modalExpande && dataModalItem"
+                (closeModal)="toggleModal(null)"></app-modal-expand>
         </div>
     </div>
 </div>

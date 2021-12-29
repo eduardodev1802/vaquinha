@@ -19,12 +19,12 @@
             height: 368px;
             width: 100%;
             max-width: 100%;
-
-            img {
-                @media (max-width: 992px) {
-                    font-size: 18px;
-                    text-align: center;
-                }
+            @media (max-width: 992px) {
+                object-fit: cover;
+                height: 230px;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
             }
         }
 
@@ -40,6 +40,11 @@
         .video-youtube {
             iframe {
                 height: 390px;
+
+                @media (max-width: 992px) {
+                    height: 240px;
+                    margin-bottom: 20px;
+                }
             }
         }
     }
@@ -217,7 +222,7 @@
                 position: relative;
 
                 &::after {
-                    content: '';
+                    content: "";
                     position: absolute;
                     height: 25px;
                     width: 1px;

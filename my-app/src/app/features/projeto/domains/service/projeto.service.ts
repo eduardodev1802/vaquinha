@@ -110,6 +110,27 @@ export class ProjetoService {
       }));
   }
 
+  getAvaliacoes(idProjeto: any) {
+    return this.http.get<any>(`${environment.apiUrl}project/ratings/${idProjeto}`, {
+      headers: this.httpOptions.headers
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+  
+  avaliar(idProjeto: any, valor: any, token: string) {
+    return this.http.post<any>(`${environment.apiUrl}sec/project/rate/${idProjeto}/${valor}`, null, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `token ${token}`
+      })
+    })
+      .pipe(map(resp => {
+        return resp;
+      }));
+  }
+
 }
 
 

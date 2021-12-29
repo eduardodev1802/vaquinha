@@ -19,6 +19,10 @@ import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { SafeDoisPipe } from 'src/app/pipes/safe-2.pipe';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { ModalExpandComponent } from './components/modal-expand/modal-expand.component';
+import { ModalAvaliacaoComponent } from './components/modal-avaliacao/modal-avaliacao.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,17 +32,22 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     PrestacaoContasComponent,
     ContribuicoesComponent,
     HistoricoComponent,
-    ComentariosComponent
+    ComentariosComponent,
+    ModalExpandComponent,
+    ModalAvaliacaoComponent
   ],
   imports: [
     CommonModule,
     ProjetoRoutingModule,
+    NgxStarRatingModule,
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
     MatExpansionModule,
     NgCircleProgressModule,
     ClipboardModule,
+    ReactiveFormsModule,
+    FormsModule,
     ScrollToModule.forRoot(),
     NgCircleProgressModule.forRoot({
       radius: 100,

@@ -27,6 +27,7 @@ export class DetalheProjetoComponent implements OnInit {
   porcentagem: any;
   urlCompartilhamento: any;
   categorias: any;
+  modalExpande = false;
 
 
   constructor(private scrollToService: ScrollToService, private dialog: MatDialog, private router: Router,  private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { 
@@ -46,8 +47,6 @@ export class DetalheProjetoComponent implements OnInit {
     this.urlCompartilhamento = window.location.href
     this.idProjeto = this.route.snapshot.paramMap.get('id');
 
- 
-
     this.getDetalheProjeto(this.idProjeto);
   }
 
@@ -64,6 +63,8 @@ export class DetalheProjetoComponent implements OnInit {
       this.getTimeline(this.projetoData);
       this.getCategorias();
       this.verificarProjetoFinalizado();
+
+      console.log(this.projetoData, 'PROJETO')
     })
   }
 
@@ -252,6 +253,10 @@ export class DetalheProjetoComponent implements OnInit {
 
   irParaPagamento() {
     this.router.navigate([`/pagamento/detalhe/${this.idProjeto}`]);
+  }
+
+  toggleModal() {
+    this.modalExpande = !this.modalExpande;
   }
 }
 
