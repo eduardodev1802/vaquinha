@@ -1,4 +1,17 @@
 <div class="historico" *ngIf="historico">
+
+
+    <div class="nome-autor">
+        {{ nomeAutor }}
+    </div>
+
+    <div class="nota-autor">
+        <span class="material-icons">
+            star
+        </span>
+        <p>{{ notaAutor.toFixed(2) }}</p>
+    </div>
+
     <div class="listaHistorico" *ngFor="let item of historico.result">
         <div class="card-data">
             <span [ngClass]="{ativo: item.status === 'A', inativo: item.status === 'F'}"></span>
@@ -15,14 +28,14 @@
             </span>
         </div>
 
-        <div class="card">
+        <div class="card" (click)="irParaProjeto(item)">
             <div class="header">
-                <img [src]="item.thumb" alt="" srcset="" (click)="toggleModal(item)">
+                <img [src]="item.thumb" alt="" srcset="">
             </div>
 
             <div class="body">
-                <h3 (click)="irParaProjeto(item)">{{ item.title }}</h3>
-                <p (click)="irParaProjeto(item)">{{ item.description }}</p>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
                 <div class="info-gerais">
                     <div class="left">
                         <span>
@@ -30,7 +43,7 @@
                         </span>
                     </div>
 
-                    <div class="right" (click)="abrirModalAvaliacao(item)">
+                    <div class="right" *ngIf="item.status === 'F'">
                         <span class="material-icons">
                             star
                         </span>
@@ -38,9 +51,10 @@
                     </div>
                 </div>
             </div>
-
-            <app-modal-expand [dataProjeto]="dataModalItem" *ngIf="modalExpande && dataModalItem"
-                (closeModal)="toggleModal(null)"></app-modal-expand>
         </div>
+    </div>
+
+    <div class="more-projects">
+        <button mat-raised-button color="primary" (click)="adicionarHistorico()">Ver mais projetos</button>
     </div>
 </div>

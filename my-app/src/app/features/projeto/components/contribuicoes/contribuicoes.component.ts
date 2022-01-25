@@ -24,9 +24,6 @@ export class ContribuicoesComponent implements OnInit {
         this.capturarImageProjeto(item);
       })
     })
-
-
-    console.log('THIS', this.contribuicoes)
   }
 
   capturarImageProjeto(item: any) {

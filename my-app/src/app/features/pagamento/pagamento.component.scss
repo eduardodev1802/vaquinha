@@ -13,7 +13,7 @@
     width: 50%;
 
     @media (max-width: 992px) {
-      height: 360px;
+      height: 160px;
       width: 100%;
     }
 
@@ -336,17 +336,39 @@
     font-weight: bold;
     color: #ffce56;
     text-align: center;
+
+    @media (max-width: 992px) {
+      text-align: center;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    mat-icon {
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
   }
 
   p {
     font-weight: normal;
     font-size: 12px;
     margin-bottom: 30px;
+
+    @media (max-width: 992px) {
+      text-align: center;
+    }
   }
 
   .group-buttons {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 992px) {
+      display: flex;
+      flex-direction: column;
+    }
 
     button {
       background-color: #342ead;
@@ -354,6 +376,11 @@
       align-items: center;
       justify-content: center;
       width: 48%;
+
+      @media (max-width: 992px) {
+        width: 100%;
+        margin-bottom: 20px;
+      }
     }
   }
 }
@@ -373,6 +400,12 @@
     font-weight: bold;
     color: #1ab882;
     text-align: center;
+
+    mat-icon {
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
   }
 
   p {
@@ -381,6 +414,12 @@
     font-weight: normal;
     font-size: 12px;
     margin-bottom: 30px;
+
+    @media (max-width: 992px) {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
   }
 
   .copiar-cod {

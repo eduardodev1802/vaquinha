@@ -46,7 +46,6 @@ export class AuthenticationService {
     loginGoogle(provider: any) {
         return this.authAngular.auth.signInWithPopup(provider)
             .then((result) => {
-                console.log('You have been successfully logged in!')
             }).catch((error) => {
                 console.log(error)
             })
@@ -55,7 +54,6 @@ export class AuthenticationService {
     loginFacebook(provider: any) {
         return this.authAngular.auth.signInWithPopup(provider)
             .then((result) => {
-                console.log('You have been successfully logged in!')
             }).catch((error) => {
                 console.log(error)
             })

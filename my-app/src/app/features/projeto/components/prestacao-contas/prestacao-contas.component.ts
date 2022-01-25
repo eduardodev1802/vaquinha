@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { ProjetoService } from '../../domains/service/projeto.service';
+import { ModalAvaliacaoComponent } from '../modal-avaliacao/modal-avaliacao.component';
 
 @Component({
   selector: 'app-prestacao-contas',
@@ -9,7 +11,8 @@ import { ProjetoService } from '../../domains/service/projeto.service';
 })
 export class PrestacaoContasComponent implements OnInit {
   @Input() listaPrestacaoData: any;
-  constructor(private projetoService: ProjetoService, private dbFirestore: AngularFirestore) { }
+  @Input() ProjetoDetalhe: any;
+  constructor(private matDialog: MatDialog, private projetoService: ProjetoService, private dbFirestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.getInformacoesPrestacao()
@@ -18,8 +21,7 @@ export class PrestacaoContasComponent implements OnInit {
   getInformacoesPrestacao() {
     this.getUser();
     this.verificarTipoPrestacao();
-
-    console.log('THIS', this.listaPrestacaoData);
+    this.getAvaliacoes();
   }
 
   getUser() {
@@ -33,9 +35,6 @@ export class PrestacaoContasComponent implements OnInit {
   verificarTipoPrestacao() {
     this.listaPrestacaoData.map((item: any) => {
       item.value2.map((resp: any) => {
-        
-        console.log('TIPO', resp.itemType);
-
         if(resp.itemType === 'I')  {
           this.buscarImagem(resp);
         }
@@ -67,6 +66,44 @@ export class PrestacaoContasComponent implements OnInit {
     }).catch(function (error: any) {
       console.log('error', error)
     })
+  }
+
+
+  getAvaliacoes() {
+    this.projetoService.getAvaliacoes(this.ProjetoDetalhe.id).subscribe((resp: any) => {
+      this.ProjetoDetalhe.avaliacoes = resp;
+      this.ProjetoDetalhe.avaliacoes.valor = this.somarAvaliacoes(this.ProjetoDetalhe.avaliacoes);
+      this.ProjetoDetalhe.avaliacoes.media = this.mediaAvaliacoes(this.ProjetoDetalhe.avaliacoes.valor);
+      this.ProjetoDetalhe.avaliacoes.qtd = resp.length
+    })
+
+  
+  }
+
+  somarAvaliacoes(item: any) {
+    let soma = 0;
+    item.map((avaliacao: any) => {
+      soma = soma + avaliacao.value;
+    })
+
+    return soma;
+  }
+
+  mediaAvaliacoes(item: any) {
+    return item / 5;
+  }
+
+  abrirModalAvaliacao(item: any) {
+    let dialogRef = this.matDialog.open(ModalAvaliacaoComponent, {
+      width: '600px',
+      data: {
+        item: item
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      item.avaliacoes.qtd = item.avaliacoes.qtd + 1;
+    });
   }
   
 }

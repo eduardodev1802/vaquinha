@@ -1,26 +1,60 @@
 .prestacao-page {
+    .button-avaliacao {
+        border-radius: 10px;
+        margin-bottom: 40px;
+    }
 
     h3 {
-        color: #2E4765;
+        display: flex;
+        color: #2e4765;
         font-size: 16px;
-        margin-bottom: 16px;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .star {
+            display: flex;
+            align-items: center;
+            margin-left: 25px;
+            background-color: #ececf8;
+            font-size: 13px;
+            align-items: center;
+            padding: 5px;
+            border-radius: 4px;
+
+            p {
+                cursor: pointer;
+                color: #342ead;
+                margin-bottom: 0px;
+                font-size: 14px;
+            }
+
+            span {
+                cursor: pointer;
+                color: #342ead;
+                margin-right: 8px;
+                font-size: 18px;
+            }
+        }
     }
 
     .imagem {
         width: 100%;
         padding: 0 40px;
         margin-bottom: 40px;
+       
 
         @media (max-width: 992px) {
             padding: 0 15px;
         }
 
         img {
+            height: 350px;
             max-width: 100%;
         }
     }
 
     .youtube {
+        height: 350px;
         padding: 0 40px;
         margin-bottom: 40px;
 
@@ -30,6 +64,7 @@
     }
 
     .video {
+        
         padding: 0 40px;
         margin-bottom: 40px;
 
@@ -37,10 +72,14 @@
             padding: 0 15px;
         }
     }
-    
+
+    video {
+        height: 350px;
+    }
+
     .not-found {
         margin-bottom: 100px;
-        
+
         h3 {
             font-weight: normal;
         }

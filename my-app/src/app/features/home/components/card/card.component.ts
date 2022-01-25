@@ -23,9 +23,7 @@ export class CardComponent implements OnInit {
 
   constructor(private router: Router, private homeService: HomeService, private dialog: MatDialog) { }
 
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
 
   arredondarKM(km: number) {
     return Math.round(km);

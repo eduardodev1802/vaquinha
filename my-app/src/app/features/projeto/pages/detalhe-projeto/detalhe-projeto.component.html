@@ -1,7 +1,7 @@
 <div class="container" *ngIf="projetoData">
     <div class="detalhe">
         <div class="detalhe__left">
-            <img [src]="projetoData.result[0].thumb" alt="" srcset="" *ngIf="projetoData.result[0].mime === 2">
+            <img [src]="projetoData.result[0].thumb" alt="" (click)="toggleModal()" srcset="" *ngIf="projetoData.result[0].mime === 2">
 
             <div *ngIf="projetoData.result[0].mime === 3">
                 <video width="100%" height="100%" [src]="projetoData.result[0].endereco" controls>
@@ -80,12 +80,6 @@
 
                         <li (click)="compartilharInstagram()">
                             <a>
-                                <img src="/assets/img/icon/instagram-shared.svg" alt="" srcset="">
-                            </a>
-                        </li>
-
-                        <li (click)="compartilharInstagram()">
-                            <a>
                                 <mat-icon aria-hidden="false" aria-label="Example home icon">share</mat-icon>
                             </a>
                         </li>
@@ -105,7 +99,8 @@
                         Encerrado
                     </button>
 
-                    <button class="local" *ngIf="projetoData.result[0].status === 'A'" mat-raised-button color="secondary" (click)="irParaLocalizacao()">
+                    <button class="local" *ngIf="projetoData.result[0].status === 'A'" mat-raised-button
+                        color="secondary" (click)="irParaLocalizacao()">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">place</mat-icon>
                         Ir no local
                     </button>
@@ -168,20 +163,25 @@
     <div class="content" id="content">
         <div class="tabs">
             <div class="tab" (click)="escolherTabDetalhe(1)" [ngClass]="{active: tabDetalhe === 1}">Descrição</div>
+            <div class="tab" *ngIf="projetoData.result[0].status === 'A'" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Projeto em Arrecadação
+            </div>
+            <div class="tab" *ngIf="projetoData.result[0].status === 'F'" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Prestação de contas
+            </div>
+            <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico</div>
             <div class="tab" (click)="escolherTabDetalhe(3)" [ngClass]="{active: tabDetalhe === 3}">Contribuições</div>
             <div class="tab" (click)="escolherTabDetalhe(5)" [ngClass]="{active: tabDetalhe === 5}">Comentários</div>
-            <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico</div>
-            <div class="tab" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Prestação de contas
-            </div>
         </div>
 
         <div class="conteudo">
             <app-descricao *ngIf="tabDetalhe === 1" [descricao]="projetoData.result[0].description"></app-descricao>
-            <app-prestacao-contas *ngIf="tabDetalhe === 2" [listaPrestacaoData]="listaPrestacaoContas">
+            <app-prestacao-contas *ngIf="tabDetalhe === 2" [ProjetoDetalhe]="projetoData.result[0]" [listaPrestacaoData]="listaPrestacaoContas">
             </app-prestacao-contas>
             <app-contribuicoes *ngIf="tabDetalhe === 3" [contribuicoes]="listaContribuicao"></app-contribuicoes>
-            <app-historico *ngIf="tabDetalhe === 4" [historico]="listaProjetosUsuario"></app-historico>
+            <app-historico [idOwner]="idUnicoOwner" [nomeAutor]="projetoData.result[0].owner.nome" *ngIf="tabDetalhe === 4" [historico]="listaProjetosUsuario"></app-historico>
             <app-comentarios *ngIf="tabDetalhe === 5" [comentarios]="ListaComentarios"></app-comentarios>
         </div>
     </div>
 </div>
+
+<app-modal-expand [dataProjeto]="dataModalItem" *ngIf="modalExpande && dataModalItem" (closeModal)="toggleModal()">
+</app-modal-expand>

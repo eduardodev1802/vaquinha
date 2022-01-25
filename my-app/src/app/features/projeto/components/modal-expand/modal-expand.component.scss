@@ -9,6 +9,10 @@
 }
 
 .detalhe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   img {
     height: 400px;
     object-fit: contain;
@@ -46,7 +50,7 @@
 .modal {
   /* Hidden by default */
   position: fixed; /* Stay in place */
- 
+
   z-index: 999;
   /* Sit on top */
   padding-top: 100px; /* Location of the box */

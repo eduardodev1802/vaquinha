@@ -19,13 +19,8 @@ export class PagamentoService {
 
   }
 
-  fazerPagamento(payload: any, token: any) {
-    return this.http.post<any>(`https://payment.diegosilva.com.br/payment`, payload, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `token ${token}`
-      })
-    })
+  fazerPagamento(payload: any) {
+    return this.http.post<any>(`https://payment.diegosilva.com.br/payment`, payload)
       .pipe(map(resp => {
         return resp;
       }));

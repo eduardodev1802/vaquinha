@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   categoriaEscolhida: any = null;
   registrosTotais: number = 0;
   query: any = null;
-  sort: any = null;
+  sort: any = 'N';
   latitude: any = null;
   longitude: any = null;
   ufFiltro: any = null;
@@ -57,6 +57,36 @@ export class HomeComponent implements OnInit {
     { value: 'TO', label: 'Tocantins' },
   ]
   estadosPosicoes: any = [];
+  mockStates = [
+    { value: 'AC', label: 'Acre' },
+    { value: 'AL', label: 'Alagoas' },
+    { value: 'AP', label: 'Amapá' },
+    { value: 'AM', label: 'Amazonas' },
+    { value: 'BA', label: 'Bahia' },
+    { value: 'CE', label: 'Ceará' },
+    { value: 'DF', label: 'Distrito Federal' },
+    { value: 'ES', label: 'Espírito Santo' },
+    { value: 'GO', label: 'Goías' },
+    { value: 'MA', label: 'Maranhão' },
+    { value: 'MT', label: 'Mato Grosso' },
+    { value: 'MS', label: 'Mato Grosso do Sul' },
+    { value: 'MG', label: 'Minas Gerais' },
+    { value: 'PA', label: 'Pará' },
+    { value: 'PB', label: 'Paraíba' },
+    { value: 'PR', label: 'Paraná' },
+    { value: 'PE', label: 'Pernambuco' },
+    { value: 'PI', label: 'Piauí' },
+    { value: 'RJ', label: 'Rio de Janeiro' },
+    { value: 'RN', label: 'Rio Grande do Norte' },
+    { value: 'RS', label: 'Rio Grande do Sul' },
+    { value: 'RO', label: 'Rondônia' },
+    { value: 'RR', label: 'Roraíma' },
+    { value: 'SC', label: 'Santa Catarina' },
+    { value: 'SP', label: 'São Paulo' },
+    { value: 'SE', label: 'Sergipe' },
+    { value: 'TO', label: 'Tocantins' },
+  ];
+  menulateralEstados = false;
   // MAP
   @ViewChild('gmap') gmapElement: any;
 
@@ -128,7 +158,6 @@ export class HomeComponent implements OnInit {
     }
 
     this.homeService.getProjects(this.paginaNumero, this.query, this.sort, this.categoriaEscolhida, objLatitude.latitude, objLatitude.longitude, filtroUF).subscribe((item) => {
-
       if (item.result.length) {
         if (this.paginaNumero === 0) {
           this.salvarInformacoesProjeto(item.result, item);
@@ -163,20 +192,24 @@ export class HomeComponent implements OnInit {
 
   salvarFotoProjeto(projets: any) {
     projets.map((item: any, index: number) => {
-      this.dbFirestore.collection('files').doc(item.mediaUid).ref.get().then((doc) => {
-        if (doc.exists) {
-          let resp: any = null;
-          resp = doc.data();
-          item.endereco = resp.address;
-          item.thumb = resp.thumbAddress;
-          item.mime = this.setMimeTipo(resp.mine)
-        } else {
-          item.endereco = null;
-          item.thumb = null;
-        }
-      }).catch(function (error) {
 
-      })
+      if(item.mediaUid) {
+        this.dbFirestore.collection('files').doc(item.mediaUid).ref.get().then((doc) => {
+          if (doc.exists) {
+            let resp: any = null;
+            resp = doc.data();
+            item.endereco = resp.address;
+            item.thumb = resp.thumbAddress;
+            item.mime = this.setMimeTipo(resp.mine)
+          } else {
+            item.endereco = null;
+            item.thumb = null;
+          }
+        }).catch(function (error) {
+  
+        })
+      }
+
     })
   }
 
@@ -194,7 +227,6 @@ export class HomeComponent implements OnInit {
       this.estadosPosicoes = item;
 
       estados.map((value: any) => {
-        console.log(value, 'value')
       })
     })
   }
@@ -208,7 +240,7 @@ export class HomeComponent implements OnInit {
   }
 
   verificarCampoPesquisa() {
-    if(this.query === '' || this.query === null) return false;
+    if (this.query === '' || this.query === null) return false;
 
     return true
   }
@@ -301,7 +333,7 @@ export class HomeComponent implements OnInit {
           title: 'Got you!',
           icon: '/assets/img/icon/icon-maps.png',
           place: item.title,
-          
+
         });
       }
 
@@ -319,7 +351,7 @@ export class HomeComponent implements OnInit {
             place: item.title
           });
         }
-          
+
       }
 
       marker.setMap(this.map)
@@ -337,11 +369,23 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  montarMenuEstado(item: any) {
+    let estado;
+
+    this.mockStates.map((resp) => {
+      if (item === resp.value) {
+        estado = resp.label;
+      }
+    })
+
+    return estado;
+  }
+
   buscarCategorias(valor: any) {
     let result: any = null;
 
     this.categorias.map((item: any) => {
-      if(item.id === valor) {
+      if (item.id === valor) {
         result = item;
       }
     })
@@ -351,7 +395,7 @@ export class HomeComponent implements OnInit {
 
   filtrarPorUF(item: any) {
     this.estadosPosicoes.map((resp: any) => {
-      if(item[0] === resp.uf) {
+      if (item[0] === resp.uf) {
         this.ufFiltro = resp;
       }
     })
@@ -362,4 +406,24 @@ export class HomeComponent implements OnInit {
 
     this.buscarMinhaPosicao(this.ufFiltro);
   }
+
+  filtrarPorUFMobile(item: any) {
+    this.toggleMenuEstadosLateral();
+    this.estadosPosicoes.map((resp: any) => {
+      if (item[0] === resp.uf) {
+        this.ufFiltro = resp;
+      }
+    })
+
+    this.query = null;
+    this.sort = null;
+    this.categoriaEscolhida = null
+
+    this.buscarMinhaPosicao(this.ufFiltro);
+  }
+
+  toggleMenuEstadosLateral() {
+    this.menulateralEstados = !this.menulateralEstados;
+  }
+
 }

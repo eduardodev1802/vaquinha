@@ -11,8 +11,12 @@
         </form>
     </div>
 
-    <div class="footer">
+    <div class="footer" *ngIf="token">
         <p *ngIf="viewProjetoAvaliado">Projeto avaliado, Obrigado por contribuir :)</p>
         <button mat-raised-button (click)="avaliar()" *ngIf="!viewProjetoAvaliado">Enviar Avaliação</button>
+    </div>
+
+    <div class="footer" *ngIf="!token">
+        <p class="error-token">Para avaliar o projeto, você precisa estar logado.</p>
     </div>
 </div>

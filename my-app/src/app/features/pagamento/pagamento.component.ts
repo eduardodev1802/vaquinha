@@ -160,8 +160,6 @@ export class PagamentoComponent implements OnInit {
       }
     ]
 
-
-
     if(this.dadosPessoais.value.doacaoPlataforma == true) {
      let result = this.calculoPorcentagem(10, parseFloat(this.dadosPessoais.value.valorContribuicao));
 
@@ -189,20 +187,18 @@ export class PagamentoComponent implements OnInit {
 
     payload = this._pagamento.montarPayload(this.projetoData, this.autor, this.dadosPessoais.value, pix, endereco, fracoes, boleto, cartaoCredito);
  
-    this.authAngular.user.subscribe((user: any) => {
-      this.pagamentoService.fazerPagamento(payload, user.ya).subscribe((resp: any) => {
-        this.resultadoPagamento = resp;
+    this.pagamentoService.fazerPagamento(payload).subscribe((resp: any) => {
+      this.resultadoPagamento = resp;
 
-        if(tipoPagamento === 3) {
-          this.metodoPagamento = 3
-        }
+      if(tipoPagamento === 3) {
+        this.metodoPagamento = 3
+      }
 
-        if(tipoPagamento === 1) {
-          this.metodoPagamento = 4
-        }
-      }, (err) => {
-        window.alert(err.error);
-      })
+      if(tipoPagamento === 1) {
+        this.metodoPagamento = 4
+      }
+    }, (err) => {
+      window.alert(err.error);
     })
 
    

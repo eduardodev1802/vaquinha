@@ -1,0 +1,66 @@
+.sidenav {
+    position: fixed;
+    background-color: white;
+    height: 100vh;
+    width: 60%;
+    top: 0;
+    z-index: 3;
+    left: -100px;
+    animation: slide 0.5s forwards;
+    padding: 15px;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        color: #342ead;
+        font-weight: bold;
+        margin-bottom: 40px;
+
+        span {
+            color: #342ead;
+            font-weight: bold;
+        }
+    }
+
+    .body {
+        list-style: none;
+
+        h3 {
+            color: #2e4765;
+            font-size: 15px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        ul {
+            list-style: none;
+            max-height: 550px;
+            overflow: auto;
+            
+            li {
+                color: #342ead;
+                margin-bottom: 16px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: block; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+  }
+
+  @keyframes slide {
+    100% { left: 0; }
+}

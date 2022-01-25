@@ -9,7 +9,14 @@
           Explore Nossos Projetos Ativos
         </h2>
 
-        <div class="tune" [matMenuTriggerFor]="menu">
+        <div class="tune desktop" [matMenuTriggerFor]="menu">
+          <span class="material-icons">
+            tune
+          </span>
+        </div>
+
+
+        <div class="tune mobile" (click)="toggleMenuEstadosLateral()">
           <span class="material-icons">
             tune
           </span>
@@ -30,7 +37,7 @@
 
 
           <input type="text" (input)="verificarInputPesquisa()" (keyup.enter)="pesquisarProjeto()" [(ngModel)]="query"
-            placeholder="Pesquise por Titulo, Descrição ou Responsável">
+            placeholder="Pesquise por Titulo, Descrição">
         </div>
 
         <div class="tune" [matMenuTriggerFor]="menu">
@@ -111,7 +118,7 @@
   <ul class="list-filter-uf">
     <li (click)="filtrarPorUF(null)">Todos os estados</li>
     <li *ngFor="let item of estados" (click)="filtrarPorUF(item)">
-      {{ item[0] }}({{ item[1] }})
+      {{ montarMenuEstado(item[0]) }}({{ item[1] }})
     </li>
   </ul>
 </mat-menu>
@@ -125,3 +132,5 @@
     </li> 
   </ul>
 </mat-menu>
+
+<app-sidemenu-estados *ngIf="estados && menulateralEstados" [Listaestados]="estados" (filtrarEstadoNav)="filtrarPorUFMobile($event)"></app-sidemenu-estados>

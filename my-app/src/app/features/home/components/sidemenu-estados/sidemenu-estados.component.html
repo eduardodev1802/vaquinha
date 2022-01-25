@@ -1,0 +1,19 @@
+<div class="sidenav">
+    <div class="header">
+        <span class="material-icons" (click)="filtrar(null)">
+            close
+        </span>
+    </div>
+
+    <div class="body">
+        <h3>Filtrar por:</h3>
+        <ul>
+            <li (click)="filtrar(null)">Todos</li>
+            <li *ngFor="let item of Listaestados" (click)="filtrar(item)">
+                {{ montarMenuEstado(item[0]) }} ({{ item[1] }})
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="overlay"></div>

@@ -28,17 +28,19 @@ export class DetalheProjetoComponent implements OnInit {
   urlCompartilhamento: any;
   categorias: any;
   modalExpande = false;
+  dataModalItem: any = null
+  pageSizeHistorico = 10;
+  idUnicoOwner = null;
 
-
-  constructor(private scrollToService: ScrollToService, private dialog: MatDialog, private router: Router,  private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) { 
+  constructor(private scrollToService: ScrollToService, private dialog: MatDialog, private router: Router, private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) {
     const navigation: any = this.router.getCurrentNavigation();
     const state = navigation.extras.state;
 
-    if(parseInt(state) === 1) {
+    if (parseInt(state) === 1) {
       this.escolherTabDetalhe(3);
     }
 
-    if(parseInt(state) === 2) {
+    if (parseInt(state) === 2) {
       this.escolherTabDetalhe(5);
     }
   }
@@ -63,13 +65,11 @@ export class DetalheProjetoComponent implements OnInit {
       this.getTimeline(this.projetoData);
       this.getCategorias();
       this.verificarProjetoFinalizado();
-
-      console.log(this.projetoData, 'PROJETO')
     })
   }
 
   verificarProjetoFinalizado() {
-    if(this.projetoData.result[0].status === 'F') {
+    if (this.projetoData.result[0].status === 'F') {
       this.escolherTabDetalhe(2);
     }
   }
@@ -84,9 +84,15 @@ export class DetalheProjetoComponent implements OnInit {
 
   getTodosProjetos(id: any) {
     this.authAngular.user.subscribe((user: any) => {
-      this.projetoService.getTodosProjetos(id, user.ya).subscribe((resp) => {
+      this.projetoService.getTodosProjetos(id, user.ya, this.pageSizeHistorico).subscribe((resp) => {
         this.listaProjetosUsuario = resp;
       })
+    })
+  }
+
+
+  contarMediaNota(projetos: any) {
+    projetos.map((item: any) => {
     })
   }
 
@@ -120,22 +126,27 @@ export class DetalheProjetoComponent implements OnInit {
 
   salvarFotoProjeto(projets: any) {
     projets.map((item: any, index: number) => {
-      this.dbFirestore.collection('files').doc(item.mediaUid).ref.get().then((doc) => {
-        if (doc.exists) {
-          let resp: any = null;
-          resp = doc.data();
-          item.endereco = resp.address;
-          item.thumb = resp.thumbAddress;
-          item.mime = this.setMimeTipo(resp.mine)
-        } else {
-          item.endereco = null;
-          item.thumb = null;
-        }
+      if (item.mediaUid) {
+        this.dbFirestore.collection('files').doc(item.mediaUid).ref.get().then((doc) => {
+          if (doc) {
+            let resp: any = null;
+            resp = doc.data();
+            item.endereco = resp.address;
+            item.thumb = resp.thumbAddress;
+            item.mime = this.setMimeTipo(resp.mine)
+          } else {
+            item.endereco = null;
+            item.thumb = null;
+          }
 
 
-      }).catch(function (error: any) {
-        console.log('error', error)
-      })
+        }).catch(function (error: any) {
+          console.log('error', error)
+        })
+      } else {
+        item.endereco = null;
+        item.thumb = null;
+      }
     })
   }
 
@@ -178,9 +189,9 @@ export class DetalheProjetoComponent implements OnInit {
 
   buscarCategoria(id: number) {
     let categoria: any = null;
-    
+
     this.categorias.map((item: any) => {
-      if(item.id === id) categoria = item;
+      if (item.id === id) categoria = item;
     })
 
     return categoria.title;
@@ -223,12 +234,15 @@ export class DetalheProjetoComponent implements OnInit {
   }
 
   getTimeline(data: any) {
-    this.projetoService.getTimeLine(data.result[0].owner).subscribe((resp) => {
+
+    this.idUnicoOwner = data.result[0].owner
+
+    this.projetoService.getTimeLine(data.result[0].owner, this.pageSizeHistorico).subscribe((resp) => {
       this.timelineData = resp;
     })
   }
 
-  fb(e:any) {
+  fb(e: any) {
     let url = 'https://xloto.com.br/gestao';
     e.preventDefault();
     let facebookWindow = window.open(
@@ -236,7 +250,7 @@ export class DetalheProjetoComponent implements OnInit {
       'facebook-popup',
       'height=350,width=600'
     );
-    
+
     return false;
   }
 
@@ -248,7 +262,7 @@ export class DetalheProjetoComponent implements OnInit {
       duration: durationInSeconds * 1000,
       verticalPosition: "top"
     });
-   
+
   }
 
   irParaPagamento() {
@@ -256,7 +270,15 @@ export class DetalheProjetoComponent implements OnInit {
   }
 
   toggleModal() {
+    this.dataModalItem = this.projetoData.result[0];
     this.modalExpande = !this.modalExpande;
+  }
+
+  adicionarPaginaHistorico() {
+    this.projetoData = null;
+    this.pageSizeHistorico = this.pageSizeHistorico + 5;
+
+    this.getDetalheProjeto(this.idProjeto);
   }
 }
 
@@ -272,4 +294,4 @@ export class DetalheProjetoComponent implements OnInit {
   `,
   ],
 })
-export class AlertComponent {}
+export class AlertComponent { }

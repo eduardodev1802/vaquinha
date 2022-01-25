@@ -26,6 +26,13 @@ body {
   }
 }
 
+label.star {
+  @media (max-width: 992px) {
+    font-size: 25px !important;
+    padding: 8px !important;
+  }
+}
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";

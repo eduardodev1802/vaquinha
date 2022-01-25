@@ -1,5 +1,15 @@
 <div class="prestacao-page">
-    <h3>Prestações de conta</h3>
+    <h3>Prestações de conta
+
+        <div class="star" *ngIf="ProjetoDetalhe.status === 'F'" (click)="abrirModalAvaliacao(ProjetoDetalhe)">
+            <span class="material-icons">
+                star
+            </span>
+            <p>{{ ProjetoDetalhe.avaliacoes.media }} ({{ProjetoDetalhe.avaliacoes.qtd}})</p>
+        </div>
+    </h3>
+
+    <button (click)="abrirModalAvaliacao(ProjetoDetalhe)" class="button-avaliacao" *ngIf="ProjetoDetalhe.status === 'F'" mat-stroked-button color="primary">Avaliar Prestação de conta</button>
 
     <div class="prestacao-page__list" *ngIf="listaPrestacaoData.length">
         <div class="prestacao-page__list--content" *ngFor="let item of listaPrestacaoData">

@@ -68,8 +68,8 @@ export class ProjetoService {
       }));
   }
 
-  getTimeLine(id: any) {
-    return this.http.get<any>(`${environment.apiUrl}project/from-user/${id}?from=0&pageSize=10&lat=-15.83&lon=-47.86`, {
+  getTimeLine(id: any, pageSize: number) {
+    return this.http.get<any>(`${environment.apiUrl}project/from-user/${id}?from=0&pageSize=${pageSize}&lat=-15.83&lon=-47.86`, {
       headers: this.httpOptions.headers
     })
       .pipe(map(resp => {
@@ -87,10 +87,10 @@ export class ProjetoService {
       }));
   }
 
-  getTodosProjetos(id: any, token: string) {
+  getTodosProjetos(id: any, token: string, pageSize: number) {
 
 
-    return this.http.get<any>(`${environment.apiUrl}sec/project/from-user/${id}?from=0&pageSize=10&lat=-15.83&lon=-47.86&`, {
+    return this.http.get<any>(`${environment.apiUrl}sec/project/from-user/${id}?from=0&pageSize=${pageSize}&lat=-15.83&lon=-47.86&`, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `token ${token}`
