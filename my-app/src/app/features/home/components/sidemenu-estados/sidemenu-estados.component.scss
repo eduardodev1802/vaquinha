@@ -25,6 +25,7 @@
 
     .body {
         list-style: none;
+        margin-bottom: 15px;
 
         h3 {
             color: #2e4765;
@@ -35,14 +36,33 @@
 
         ul {
             list-style: none;
-            max-height: 550px;
+            max-height: 400px;
             overflow: auto;
-            
+
             li {
                 color: #342ead;
                 margin-bottom: 16px;
                 font-size: 14px;
+
+                &.active {
+                    font-weight: bold;
+                }
             }
+        }
+    }
+
+    .footer {
+        display: flex;
+
+        span {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #5341ad;
+        }
+
+        p {
+            color: #5341ad;
+            margin-top: -3px;
         }
     }
 }
@@ -56,11 +76,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
-  }
+}
 
-  @keyframes slide {
-    100% { left: 0; }
+@keyframes slide {
+    100% {
+        left: 0;
+    }
 }

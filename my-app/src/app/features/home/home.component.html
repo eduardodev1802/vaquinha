@@ -74,7 +74,7 @@
       <div class="home-page__listProjet--results">
         <div class="left">
           <h3 *ngIf="!ufFiltro">Próximos a você: ({{registrosTotais}})</h3>
-          <h3 *ngIf="ufFiltro">Projetos em {{ ufFiltro.description }}: ({{registrosTotais}})</h3>
+          <h3 *ngIf="ufFiltro">Projetos em {{ ufFiltro.uf }}: ({{registrosTotais}})</h3>
 
           <div *ngIf="categoriaEscolhida">
             <div class="list-categorias">
@@ -133,4 +133,4 @@
   </ul>
 </mat-menu>
 
-<app-sidemenu-estados *ngIf="estados && menulateralEstados" [Listaestados]="estados" (filtrarEstadoNav)="filtrarPorUFMobile($event)"></app-sidemenu-estados>
+<app-sidemenu-estados *ngIf="estados && menulateralEstados" [EstadoAtivo]="indexFiltro" (EscolherFiltro)="addIndexFiltro($event)" [Listaestados]="estados" (filtrarEstadoNav)="filtrarPorUFMobile($event)"></app-sidemenu-estados>

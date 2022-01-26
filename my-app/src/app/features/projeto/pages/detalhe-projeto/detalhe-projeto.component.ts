@@ -83,10 +83,8 @@ export class DetalheProjetoComponent implements OnInit {
   }
 
   getTodosProjetos(id: any) {
-    this.authAngular.user.subscribe((user: any) => {
-      this.projetoService.getTodosProjetos(id, user.ya, this.pageSizeHistorico).subscribe((resp) => {
-        this.listaProjetosUsuario = resp;
-      })
+    this.projetoService.getTodosProjetos(id, this.pageSizeHistorico).subscribe((resp) => {
+      this.listaProjetosUsuario = resp;
     })
   }
 

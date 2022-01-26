@@ -69,9 +69,7 @@ export class ProjetoService {
   }
 
   getTimeLine(id: any, pageSize: number) {
-    return this.http.get<any>(`${environment.apiUrl}project/from-user/${id}?from=0&pageSize=${pageSize}&lat=-15.83&lon=-47.86`, {
-      headers: this.httpOptions.headers
-    })
+    return this.http.get<any>(`${environment.apiUrl}project/from-user/${id}?from=0&pageSize=${pageSize}&lat=-15.83&lon=-47.86`)
       .pipe(map(resp => {
         return resp;
       }));
@@ -87,15 +85,8 @@ export class ProjetoService {
       }));
   }
 
-  getTodosProjetos(id: any, token: string, pageSize: number) {
-
-
-    return this.http.get<any>(`${environment.apiUrl}sec/project/from-user/${id}?from=0&pageSize=${pageSize}&lat=-15.83&lon=-47.86&`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `token ${token}`
-      })
-    })
+  getTodosProjetos(id: any, pageSize: number) {
+    return this.http.get<any>(`${environment.apiUrl}project/from-user/${id}?from=0&pageSize=${pageSize}&lat=-15.83&lon=-47.86&`)
       .pipe(map(resp => {
         return resp;
       }));

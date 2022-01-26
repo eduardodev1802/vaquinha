@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidemenu-estados',
@@ -7,7 +9,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SidemenuEstadosComponent implements OnInit {
   @Output() filtrarEstadoNav = new EventEmitter();
+  @Output() EscolherFiltro = new EventEmitter();
   @Input() Listaestados: any;
+  @Input() EstadoAtivo: any
   mockStates = [
     { value: 'AC', label: 'Acre' },
     { value: 'AL', label: 'Alagoas' },
@@ -37,10 +41,20 @@ export class SidemenuEstadosComponent implements OnInit {
     { value: 'SE', label: 'Sergipe' },
     { value: 'TO', label: 'Tocantins' },
   ];
+  indexFiltro = null
 
-  constructor() { }
+  constructor(
+    private readonly router: Router,
+    private authAngular: AngularFireAuth,
+  ) { }
 
   ngOnInit(): void {}
+
+  logOut(): void {
+    this.authAngular.auth.signOut();
+    
+    this.router.navigate(['/login']);
+  }
 
 
   montarMenuEstado(item: any) {
@@ -55,7 +69,20 @@ export class SidemenuEstadosComponent implements OnInit {
     return estado;
   }
 
-  filtrar(item: any) {
+  verificarAtividade(item: any) {
+    let status = null;
+
+    if(item[0] === this.EstadoAtivo.uf) {
+      status = true;
+    } else {
+      status = false;
+    }
+
+    return status
+  }
+
+  filtrar(item: any, index: any) {
     this.filtrarEstadoNav.emit(item);
+    this.EscolherFiltro.emit(index)
   }
 }

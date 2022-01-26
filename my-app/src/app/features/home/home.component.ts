@@ -87,6 +87,7 @@ export class HomeComponent implements OnInit {
     { value: 'TO', label: 'Tocantins' },
   ];
   menulateralEstados = false;
+  indexFiltro: any;
   // MAP
   @ViewChild('gmap') gmapElement: any;
 
@@ -405,6 +406,10 @@ export class HomeComponent implements OnInit {
     this.categoriaEscolhida = null
 
     this.buscarMinhaPosicao(this.ufFiltro);
+  }
+
+  addIndexFiltro(event: any) {
+    this.indexFiltro = event;
   }
 
   filtrarPorUFMobile(item: any) {

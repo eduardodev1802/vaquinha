@@ -1,6 +1,6 @@
 <div class="sidenav">
     <div class="header">
-        <span class="material-icons" (click)="filtrar(null)">
+        <span class="material-icons" (click)="filtrar(null, null)">
             close
         </span>
     </div>
@@ -8,11 +8,20 @@
     <div class="body">
         <h3>Filtrar por:</h3>
         <ul>
-            <li (click)="filtrar(null)">Todos</li>
-            <li *ngFor="let item of Listaestados" (click)="filtrar(item)">
+            <li (click)="filtrar(null, null)" [ngClass]="{active: EstadoAtivo === null}">Todos</li>
+            <li *ngFor="let item of Listaestados; let i = index" (click)="filtrar(item, i)"
+                [ngClass]="{active: EstadoAtivo === i}">
                 {{ montarMenuEstado(item[0]) }} ({{ item[1] }})
             </li>
         </ul>
+    </div>
+
+    <div class="footer">
+        <span class="material-icons" (click)="logOut()">
+            logout
+        </span>
+        <p (click)="logOut()">
+            Sair</p>
     </div>
 </div>
 

@@ -32,10 +32,8 @@ export class HistoricoComponent implements OnInit {
   }
 
   buscarTodosProjetos(historico: any) {
-    this.authAngular.user.subscribe((user: any) => {
-      this.projetoService.getTodosProjetos(this.idOwner, user.ya, historico.totalRecords).subscribe((resp) => {
-        this.capturarNotaAutor(resp.result);
-      })
+    this.projetoService.getTodosProjetos(this.idOwner, historico.totalRecords).subscribe((resp) => {
+      this.capturarNotaAutor(resp.result);
     })
   }
 

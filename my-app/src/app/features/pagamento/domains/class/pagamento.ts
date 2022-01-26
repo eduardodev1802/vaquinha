@@ -3,15 +3,6 @@ export class Pagamento {
 
     montarPayload(infoProjeto: any, autor: any, dadosUsuario: any, dadosPIX: any, dadosEndereco: any, fracoes: any, boleto: any, cartaoCredito: any) {
 
-        console.log('CHEGOU NO PAYLOAD INFO PROJETO', infoProjeto);
-        console.log('CHEGOU NO PAYLOAD AUTOR', autor);
-        console.log('CHEGOU NO PAYLOAD DADOS USUARIO', dadosUsuario);
-        console.log('CHEGOU NO PAYLOAD DADOS dadosPIX', dadosPIX);
-        console.log('CHEGOU NO PAYLOAD DADOS dadosEndereco', dadosEndereco);
-        console.log('CHEGOU NO PAYLOAD DADOS fracoes', fracoes);
-        console.log('CHEGOU NO PAYLOAD DADOS boleto', boleto);
-        console.log('CHEGOU NO PAYLOAD DADOS cartaoCredito', cartaoCredito);
-
         let data = {
             "description": infoProjeto.description,
             "systemId": 1,
