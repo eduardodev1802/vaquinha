@@ -24,6 +24,9 @@ import { ModalAvaliacaoComponent } from './components/modal-avaliacao/modal-aval
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [
     SafeDoisPipe,
@@ -65,7 +68,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       subtitleFontSize: "80",
       unitsFontSize: "50",
       unitsColor: "#FFBD00"
-    })
+    }),
+    PdfViewerModule
   ]
 })
 export class ProjetoModule { }

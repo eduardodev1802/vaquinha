@@ -431,5 +431,9 @@
         &:hover {
             color: #342ead;
         }
+
+        &.active {
+            font-weight: bold;
+        }
     }
 }

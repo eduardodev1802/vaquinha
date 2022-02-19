@@ -17,10 +17,19 @@
     }
 }
 
-.nome-autor  {
+.nome-autor {
     margin-left: 25px;
-    font-weight: bold;
     color: #342ead;
+    border: 1px solid #342ead;
+    display: inline-block;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 20px;
+
+    strong {
+        font-weight: bold;
+    }
 }
 
 .nota-autor {
@@ -215,12 +224,22 @@
     justify-content: center;
     margin: 100px;
 
+    @media (max-width: 992px) {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0 30px 35px;
+    }
+
     button {
         border-radius: 4px;
         width: 200px;
         background: transparent;
         border: 1px solid #342ead;
         color: #342ead;
+
+        @media (max-width: 992px) {
+            width: 100%;
+        }
 
         &:hover {
             background-color: #342ead;

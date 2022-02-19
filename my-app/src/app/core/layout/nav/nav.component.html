@@ -1,7 +1,7 @@
 <div class="container">
   <mat-toolbar data-test="mat-toolbar">
     <div class="left">
-      <h1 [routerLink]="['/']" routerLinkActive="router-link-active" >Logo</h1>
+      <h1>Logo</h1>
     </div>
 
     <div class="right">
@@ -24,19 +24,19 @@
 <mat-menu #menu="matMenu">
 
   <ul class="list-menu">
-    <li [routerLink]="['/']" routerLinkActive="router-link-active" >
+    <!-- <li [routerLink]="['/']" routerLinkActive="router-link-active" >
       <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
       <p>Inicio</p>
       <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
-    </li>
+    </li> -->
 
-    <li (click)="abrirModalAppLoja()">
+    <!-- <li (click)="abrirModalAppLoja()">
       <mat-icon aria-hidden="false" aria-label="Example home icon">sensor_door</mat-icon>
       <p>Meus projetos</p>
       <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
-    </li>
+    </li> -->
 
-    <li (click)="abrirModalAppLoja()">
+    <!-- <li (click)="abrirModalAppLoja()">
       <mat-icon aria-hidden="false" aria-label="Example home icon">public</mat-icon>
       <p>Minhas reuniões</p>
       <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
@@ -58,18 +58,18 @@
       <mat-icon aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
       <p>Notificações</p>
       <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
-    </li>
+    </li> -->
 
-    <li (click)="abrirModalAppLoja()">
+    <li (click)="abrirSobreNos()">
       <mat-icon aria-hidden="false" aria-label="Example home icon">help</mat-icon>
       <p>Sobre</p>
       <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
     </li>
 
-    <li (click)="logOut()">
+    <!-- <li (click)="logOut()">
       <mat-icon aria-hidden="false" aria-label="Example home icon">logout</mat-icon>
       <p>Sair</p>
       <img src="/assets/img/icon/icon-list-menu.svg" alt="" srcset="">
-    </li>
+    </li> -->
   </ul>
 </mat-menu>

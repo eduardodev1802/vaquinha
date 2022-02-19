@@ -6,6 +6,8 @@
 
     .body {
         margin-bottom: 20px;
+        max-height: 300px;
+        overflow-y: auto;
         
         h3 {
             color: #4E26B8;

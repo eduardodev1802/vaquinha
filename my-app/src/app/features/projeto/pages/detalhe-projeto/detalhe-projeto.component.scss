@@ -282,14 +282,46 @@
 
             .avatar {
                 display: flex;
-                align-items: center;
 
-                img {
-                    margin-right: 8px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    height: 40px;
-                    width: 40px;
+                .left {
+                    img {
+                        margin-right: 8px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        height: 40px;
+                        width: 40px;
+                    }
+                }
+
+                h3 {
+                    margin-bottom: 5px;
+                }
+
+                .nota-autor {
+                    display: flex;
+                    align-items: center;
+                    background-color: #ececf8;
+                    font-size: 13px;
+                    align-items: center;
+                    padding: 5px;
+                    border-radius: 4px;
+                    margin-bottom: 30px;
+                    width: 70px;
+                
+                    p {
+                        cursor: pointer;
+                        color: #342ead;
+                        margin-bottom: 0px;
+                        font-size: 14px;
+                        font-weight: bold;
+                    }
+                
+                    span {
+                        cursor: pointer;
+                        color: #342ead;
+                        margin-right: 8px;
+                        font-size: 18px;
+                    }
                 }
             }
 
@@ -419,4 +451,11 @@ svg {
             font-size: 80px;
         }
     }
+}
+
+
+tspan {
+    @media (max-width: 992px) {
+        font-size: 55px;
+    } 
 }

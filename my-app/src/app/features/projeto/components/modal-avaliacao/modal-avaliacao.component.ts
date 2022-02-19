@@ -34,7 +34,8 @@ export class ModalAvaliacaoComponent implements OnInit {
 
       setTimeout(() => {
         this.matDialog.closeAll();
-      }, 2000);
+        window.location.reload();
+      }, 1000);
     })
   }
 }

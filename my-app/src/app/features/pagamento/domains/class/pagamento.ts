@@ -3,14 +3,17 @@ export class Pagamento {
 
     montarPayload(infoProjeto: any, autor: any, dadosUsuario: any, dadosPIX: any, dadosEndereco: any, fracoes: any, boleto: any, cartaoCredito: any) {
 
+
+        console.log("DADOS USUARIOS", dadosUsuario);
+
         let data = {
             "description": infoProjeto.description,
             "systemId": 1,
-            "name": autor.nome,
-            "userId": autor.cpfCnpj,
-            "phoneNumber": autor.telefone,
-            "email": autor.email,
-            "docNumber": autor.cpfCnpj,
+            "name": dadosUsuario.name,
+            "userId": dadosUsuario.cpf,
+            "phoneNumber": dadosUsuario.telefone,
+            "email": dadosUsuario.email,
+            "docNumber": dadosUsuario.cpf,
             "docType": 'CPF',
             "payload": {
                 "entityId": infoProjeto.id,

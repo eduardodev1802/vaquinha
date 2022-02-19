@@ -88,6 +88,8 @@ export class HomeComponent implements OnInit {
   ];
   menulateralEstados = false;
   indexFiltro: any;
+  idUF: any = null;
+
   // MAP
   @ViewChild('gmap') gmapElement: any;
 
@@ -395,6 +397,9 @@ export class HomeComponent implements OnInit {
   }
 
   filtrarPorUF(item: any) {
+
+    this.idUF = item[0];
+
     this.estadosPosicoes.map((resp: any) => {
       if (item[0] === resp.uf) {
         this.ufFiltro = resp;

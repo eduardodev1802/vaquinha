@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjetoService } from '../../domains/service/projeto.service';
@@ -12,7 +13,13 @@ import { ModalAvaliacaoComponent } from '../modal-avaliacao/modal-avaliacao.comp
 export class PrestacaoContasComponent implements OnInit {
   @Input() listaPrestacaoData: any;
   @Input() ProjetoDetalhe: any;
-  constructor(private matDialog: MatDialog, private projetoService: ProjetoService, private dbFirestore: AngularFirestore) { }
+  @Input() IdUsuarioLogado: any;
+  token: any;
+  viewAvaliacao = true;
+
+
+  constructor(private authAngular: AngularFireAuth, private matDialog: MatDialog, private projetoService: ProjetoService, private dbFirestore: AngularFirestore) { 
+  }
 
   ngOnInit(): void {
     this.getInformacoesPrestacao()
@@ -35,22 +42,31 @@ export class PrestacaoContasComponent implements OnInit {
   verificarTipoPrestacao() {
     this.listaPrestacaoData.map((item: any) => {
       item.value2.map((resp: any) => {
-        if(resp.itemType === 'I')  {
+
+        console.log('RESP', resp.itemType);
+
+        if (resp.itemType === 'I') {
           this.buscarImagem(resp);
         }
 
-        if(resp.itemType === 'V')  {
+        if (resp.itemType === 'V') {
           this.buscarImagem(resp);
         }
 
-        if(resp.itemType === 'Y')  {
+        if (resp.itemType === 'Y') {
+          this.buscarImagem(resp);
+        }
+
+        if (resp.itemType === 'D') {
           this.buscarImagem(resp);
         }
       })
     })
+
+    console.log('THIIIS', this.listaPrestacaoData)
   }
 
-  montarIframeYoutube(url: string) { 
+  montarIframeYoutube(url: string) {
     let novaURL = url.split('/');
     let urlYoutube = `https://www.youtube.com/embed/${novaURL[3]}`;
     return urlYoutube
@@ -75,9 +91,25 @@ export class PrestacaoContasComponent implements OnInit {
       this.ProjetoDetalhe.avaliacoes.valor = this.somarAvaliacoes(this.ProjetoDetalhe.avaliacoes);
       this.ProjetoDetalhe.avaliacoes.media = this.mediaAvaliacoes(this.ProjetoDetalhe.avaliacoes.valor);
       this.ProjetoDetalhe.avaliacoes.qtd = resp.length
+      this.verificarProjetoAvaliacao();
     })
+  }
 
-  
+  verificarProjetoAvaliacao() {
+
+    console.log('USUARIO LOGADO', this.IdUsuarioLogado);
+
+    if (this.IdUsuarioLogado) {
+      this.ProjetoDetalhe.avaliacoes.map((item: any) => {
+        if (item.userId === this.IdUsuarioLogado) {
+
+          console.log('item', item.userId);
+
+          this.viewAvaliacao = false;
+        }
+      })
+    }
+
   }
 
   somarAvaliacoes(item: any) {
@@ -100,10 +132,6 @@ export class PrestacaoContasComponent implements OnInit {
         item: item
       }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      item.avaliacoes.qtd = item.avaliacoes.qtd + 1;
-    });
   }
-  
+
 }

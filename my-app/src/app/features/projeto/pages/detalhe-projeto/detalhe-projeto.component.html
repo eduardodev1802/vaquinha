@@ -1,7 +1,8 @@
 <div class="container" *ngIf="projetoData">
     <div class="detalhe">
         <div class="detalhe__left">
-            <img [src]="projetoData.result[0].thumb" alt="" (click)="toggleModal()" srcset="" *ngIf="projetoData.result[0].mime === 2">
+            <img [src]="projetoData.result[0].thumb" alt="" (click)="toggleModal()" srcset=""
+                *ngIf="projetoData.result[0].mime === 2">
 
             <div *ngIf="projetoData.result[0].mime === 3">
                 <video width="100%" height="100%" [src]="projetoData.result[0].endereco" controls>
@@ -29,9 +30,9 @@
                 </div>
 
                 <div class="right">
-                    <circle-progress [percent]="porcentagem" [radius]="100" [outerStrokeWidth]="16"
-                        [innerStrokeWidth]="8" [outerStrokeColor]="'#FFBD00'" [innerStrokeColor]="'#dfd8d8'"
-                        [animation]="true" [animationDuration]="300">
+                    <circle-progress [titleFontSize]="'55'" [percent]="porcentagem" [radius]="100"
+                        [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#FFBD00'"
+                        [innerStrokeColor]="'#dfd8d8'" [animation]="true" [animationDuration]="300">
                     </circle-progress>
                 </div>
             </div>
@@ -96,7 +97,7 @@
                     <button class="encerrado" (click)="escolherTabDetalhe(2)" mat-raised-button color="secondary"
                         *ngIf="projetoData.result[0].status === 'F'">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">highlight_off</mat-icon>
-                        Encerrado
+                        Projeto Encerrado
                     </button>
 
                     <button class="local" *ngIf="projetoData.result[0].status === 'A'" mat-raised-button
@@ -111,8 +112,20 @@
 
             <div class="detalhe__right--autor">
                 <div class="avatar">
-                    <img [src]="projetoData.result[0].owner.fotoUsuario" alt="" srcset="">
-                    <h3>{{ projetoData.result[0].owner.nome }}</h3>
+                    <div class="left">
+                        <img [src]="projetoData.result[0].owner.fotoUsuario" alt="" srcset="">
+                    </div>
+
+                    <div class="right">
+                        <h3>{{ projetoData.result[0].owner.nome }}</h3>
+                        <div class="nota-autor" *ngIf="notaAutor">
+                            <span class="material-icons">
+                                star
+                            </span>
+                            <p>{{ notaAutor.toFixed(2) }}</p>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <a [ngxScrollTo]="'#content'" (click)="escolherTabDetalhe(4)">
@@ -163,9 +176,11 @@
     <div class="content" id="content">
         <div class="tabs">
             <div class="tab" (click)="escolherTabDetalhe(1)" [ngClass]="{active: tabDetalhe === 1}">Descrição</div>
-            <div class="tab" *ngIf="projetoData.result[0].status === 'A'" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Projeto em Arrecadação
+            <div class="tab" *ngIf="projetoData.result[0].status === 'A'" (click)="escolherTabDetalhe(2)"
+                [ngClass]="{active: tabDetalhe === 2}">Projeto em Arrecadação
             </div>
-            <div class="tab" *ngIf="projetoData.result[0].status === 'F'" (click)="escolherTabDetalhe(2)" [ngClass]="{active: tabDetalhe === 2}">Prestação de contas
+            <div class="tab" *ngIf="projetoData.result[0].status === 'F'" (click)="escolherTabDetalhe(2)"
+                [ngClass]="{active: tabDetalhe === 2}">Prestação de contas
             </div>
             <div class="tab" (click)="escolherTabDetalhe(4)" [ngClass]="{active: tabDetalhe === 4}">Histórico</div>
             <div class="tab" (click)="escolherTabDetalhe(3)" [ngClass]="{active: tabDetalhe === 3}">Contribuições</div>
@@ -174,10 +189,12 @@
 
         <div class="conteudo">
             <app-descricao *ngIf="tabDetalhe === 1" [descricao]="projetoData.result[0].description"></app-descricao>
-            <app-prestacao-contas *ngIf="tabDetalhe === 2" [ProjetoDetalhe]="projetoData.result[0]" [listaPrestacaoData]="listaPrestacaoContas">
+            <app-prestacao-contas *ngIf="tabDetalhe === 2 && viewPrestacao" [IdUsuarioLogado]="idUsuarioLogado"
+                [ProjetoDetalhe]="projetoData.result[0]" [listaPrestacaoData]="listaPrestacaoContas">
             </app-prestacao-contas>
             <app-contribuicoes *ngIf="tabDetalhe === 3" [contribuicoes]="listaContribuicao"></app-contribuicoes>
-            <app-historico [idOwner]="idUnicoOwner" [nomeAutor]="projetoData.result[0].owner.nome" *ngIf="tabDetalhe === 4" [historico]="listaProjetosUsuario"></app-historico>
+            <app-historico [idOwner]="idUnicoOwner" [nomeAutor]="projetoData.result[0].owner.nome"
+                *ngIf="tabDetalhe === 4" [historico]="listaProjetosUsuario"></app-historico>
             <app-comentarios *ngIf="tabDetalhe === 5" [comentarios]="ListaComentarios"></app-comentarios>
         </div>
     </div>

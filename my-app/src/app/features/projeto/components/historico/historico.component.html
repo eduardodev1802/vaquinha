@@ -2,15 +2,15 @@
 
 
     <div class="nome-autor">
-        {{ nomeAutor }}
+       Conheça os projetos ativos e <br> encerrados de  <strong>{{ nomeAutor }}</strong>
     </div>
 
-    <div class="nota-autor">
+    <!-- <div class="nota-autor">
         <span class="material-icons">
             star
         </span>
         <p>{{ notaAutor.toFixed(2) }}</p>
-    </div>
+    </div> -->
 
     <div class="listaHistorico" *ngFor="let item of historico.result">
         <div class="card-data">

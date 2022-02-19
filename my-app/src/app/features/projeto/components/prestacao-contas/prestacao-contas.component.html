@@ -1,7 +1,8 @@
 <div class="prestacao-page">
     <h3>Prestações de conta
 
-        <div class="star" *ngIf="ProjetoDetalhe.status === 'F'" (click)="abrirModalAvaliacao(ProjetoDetalhe)">
+        <div class="star" *ngIf="ProjetoDetalhe.status === 'F' && viewAvaliacao"
+            (click)="abrirModalAvaliacao(ProjetoDetalhe)">
             <span class="material-icons">
                 star
             </span>
@@ -9,11 +10,13 @@
         </div>
     </h3>
 
-    <button (click)="abrirModalAvaliacao(ProjetoDetalhe)" class="button-avaliacao" *ngIf="ProjetoDetalhe.status === 'F'" mat-stroked-button color="primary">Avaliar Prestação de conta</button>
+    <button (click)="abrirModalAvaliacao(ProjetoDetalhe)" class="button-avaliacao"
+        *ngIf="ProjetoDetalhe.status === 'F' && viewAvaliacao" mat-stroked-button color="primary">Avaliar Prestação de
+        conta</button>
 
     <div class="prestacao-page__list" *ngIf="listaPrestacaoData.length">
         <div class="prestacao-page__list--content" *ngFor="let item of listaPrestacaoData">
-            <h3>{{ item.onwer.nome }}</h3>
+            <h3>Agradecimentos de {{ item.onwer.nome }}</h3>
 
             <div class="list-contribuicoes" *ngFor="let contribuicao of item.value2">
                 <div class="text" *ngIf="contribuicao.itemType === 'R'">
@@ -29,17 +32,23 @@
                 </div>
 
                 <div class="youtube" *ngIf="contribuicao.itemType === 'Y'">
-                    <iframe width="100%" height="100%" [src]="montarIframeYoutube(contribuicao.detalheContribuicao.address) | safedois"></iframe>
+                    <iframe width="100%" height="100%"
+                        [src]="montarIframeYoutube(contribuicao.detalheContribuicao.address) | safedois"></iframe>
                 </div>
 
                 <div class="imagem" *ngIf="contribuicao.itemType === 'I'">
-                   <img [src]="contribuicao.detalheContribuicao.address" alt="" srcset="">
+                    <img [src]="contribuicao.detalheContribuicao.address" alt="" srcset="">
+                </div>
+
+                <div class="pdf" *ngIf="contribuicao.itemType === 'D'">
+                    <pdf-viewer style="width: 100%; height: 350px" [src]="contribuicao.detalheContribuicao.address" [render-text]="true" [original-size]="false"></pdf-viewer>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="not-found" *ngIf="!listaPrestacaoData.length">
-        <h3>Ainda não foi registrada nenhuma prestação de contas.</h3>
+        <h3>Após o encerramento do Projeto, será postado nessa área a prestação de contas, <br> por meio de vídeos,
+            imagens ou documentos.</h3>
     </div>
 </div>

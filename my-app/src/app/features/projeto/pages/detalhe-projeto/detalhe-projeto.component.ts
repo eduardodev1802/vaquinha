@@ -31,6 +31,9 @@ export class DetalheProjetoComponent implements OnInit {
   dataModalItem: any = null
   pageSizeHistorico = 10;
   idUnicoOwner = null;
+  idUsuarioLogado = null;
+  viewPrestacao = false;
+  notaAutor = 0
 
   constructor(private scrollToService: ScrollToService, private dialog: MatDialog, private router: Router, private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private projetoService: ProjetoService, private route: ActivatedRoute, private dbFirestore: AngularFirestore) {
     const navigation: any = this.router.getCurrentNavigation();
@@ -49,6 +52,12 @@ export class DetalheProjetoComponent implements OnInit {
     this.urlCompartilhamento = window.location.href
     this.idProjeto = this.route.snapshot.paramMap.get('id');
 
+    this.authAngular.user.subscribe((user: any) => {
+      this.idUsuarioLogado = user.uid;
+      this.viewPrestacao = true;
+    })
+
+    this.viewPrestacao = true;
     this.getDetalheProjeto(this.idProjeto);
   }
 
@@ -85,9 +94,22 @@ export class DetalheProjetoComponent implements OnInit {
   getTodosProjetos(id: any) {
     this.projetoService.getTodosProjetos(id, this.pageSizeHistorico).subscribe((resp) => {
       this.listaProjetosUsuario = resp;
+      this.capturarNotaAutor(this.listaProjetosUsuario.result, resp.totalRecords)
     })
   }
 
+  capturarNotaAutor(projetos: any, total: any) {
+    let sum = 0;
+    for (let key in projetos) {
+
+      this.projetoService.getAvaliacoes(projetos[key].id).subscribe((resp: any) => {
+        resp.map((avaliacao: any) => {
+          sum +=  avaliacao.value
+          this.notaAutor = sum / total;
+        })
+      })
+    }
+  }
 
   contarMediaNota(projetos: any) {
     projetos.map((item: any) => {
@@ -136,8 +158,6 @@ export class DetalheProjetoComponent implements OnInit {
             item.endereco = null;
             item.thumb = null;
           }
-
-
         }).catch(function (error: any) {
           console.log('error', error)
         })
@@ -233,7 +253,7 @@ export class DetalheProjetoComponent implements OnInit {
 
   getTimeline(data: any) {
 
-    this.idUnicoOwner = data.result[0].owner
+    this.idUnicoOwner = data.result[0].owner;
 
     this.projetoService.getTimeLine(data.result[0].owner, this.pageSizeHistorico).subscribe((resp) => {
       this.timelineData = resp;

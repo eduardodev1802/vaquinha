@@ -8,6 +8,7 @@ import { ProjetoService } from '../projeto/domains/service/projeto.service';
 import { AlertComponent } from '../projeto/pages/detalhe-projeto/detalhe-projeto.component';
 import { Pagamento } from './domains/class/pagamento';
 import { PagamentoService } from './domains/services/pagamento.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-pagamento',
@@ -28,7 +29,7 @@ export class PagamentoComponent implements OnInit {
   payload: any = null;
 
 
-  constructor( private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private pagamentoService: PagamentoService, private route: ActivatedRoute, private projetoService: ProjetoService, private fb: FormBuilder) { }
+  constructor(private _location: Location, private _snackBar: MatSnackBar, private clipboard: Clipboard, private authAngular: AngularFireAuth, private pagamentoService: PagamentoService, private route: ActivatedRoute, private projetoService: ProjetoService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.idProjeto = this.route.snapshot.paramMap.get('id');
@@ -199,8 +200,13 @@ export class PagamentoComponent implements OnInit {
       }
     }, (err) => {
       window.alert(err.error);
-    })
-
-   
+    })   
   }
+
+
+  voltarPaginaAnterior() {
+    this._location.back();
+  }
+
+
 }

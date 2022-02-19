@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalLojaComponent } from './components/modal-loja/modal-loja.component';
 import { ModalSobreNosComponent } from './components/modal-sobre-nos/modal-sobre-nos.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   imports: [
@@ -29,6 +31,7 @@ import { ModalSobreNosComponent } from './components/modal-sobre-nos/modal-sobre
     MatButtonModule,
     ModalLojaComponent,
     ModalSobreNosComponent,
+    MatDialogModule,
     ReactiveFormsModule,
   ],
   declarations: [

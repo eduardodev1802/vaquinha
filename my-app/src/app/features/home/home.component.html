@@ -116,8 +116,8 @@
 <mat-menu #menu="matMenu" class="">
   <h3 class="title-uf">Filtrar por região</h3>
   <ul class="list-filter-uf">
-    <li (click)="filtrarPorUF(null)">Todos os estados</li>
-    <li *ngFor="let item of estados" (click)="filtrarPorUF(item)">
+    <li (click)="filtrarPorUF(null)" [ngClass]="{active: idUF === null}">Todos os <br> estados</li>
+    <li *ngFor="let item of estados" (click)="filtrarPorUF(item)" [ngClass]="{active: idUF === item[0]}">
       {{ montarMenuEstado(item[0]) }}({{ item[1] }})
     </li>
   </ul>

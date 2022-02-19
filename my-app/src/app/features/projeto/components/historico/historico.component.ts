@@ -14,7 +14,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HistoricoComponent implements OnInit {
   @Output() addMaisProjetos = new EventEmitter();
-  @Input() historico: any;
+  @Input() historico: any = [];
   @Input() idOwner: any;
   @Input() nomeAutor: any;
   modalExpande = false;
@@ -48,8 +48,6 @@ export class HistoricoComponent implements OnInit {
         })
       })
     }
-
-
   }
 
   capturarImageProjeto(historico: any) {
